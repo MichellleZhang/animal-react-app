@@ -8,12 +8,15 @@ import ContactInfo from "./details-page/contactInfo"
 import authReducer from "./reducers/auth-reducer";
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
+<<<<<<< HEAD
 import Profile from "./profile-page/profile";
 import ManagementDashboard from "./management-page.js/dashboard"
 import Search from "../PetSOS/search/search";
 import LostPet from "./lost-pet";
 import HomePage from "./home-page/home-page";
 
+=======
+>>>>>>> 7bd2fe7 (version 0.1)
 
 const store = configureStore({
     reducer: { user: authReducer }
@@ -25,16 +28,17 @@ function PetSOS() {
                 <NavigationBar />
                 <div>
                     <Routes>
-                        <Route path="/home" element={<HomePage />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/reportLost" element={<LostPet />} />
+                    <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/privatePolicy" element={<PrivatePolicy />} />
                         <Route path="/serviceTerm" element={<ServiceTerm />} />
                         <Route path="/contactInfo" element={<ContactInfo />} />
-                        <Route path="/profile" element={<Profile />} />
-                        <Route path="/management-dashboard" element={<ManagementDashboard/>} />
+                        <Route path="/profile" element={<ProtectedRoute> <Profile /></ProtectedRoute>} />
+                        <Route path="/profile/:id" element={<PublicProfile/>} />
+                        <Route path="/management-dashboard" element={<ProtectedRoute><ManagementDashboard /></ProtectedRoute>} />
                         <Route path="/search" element={<Search />} />
+                        <Route path="/myPets" element={<Mypets/>} />
+                        <Route path="/details/:id" element={<PetDetails />} />
                     </Routes>
                 </div>
             </div>

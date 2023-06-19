@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    width: 100vw;
+    height: 87vh;
+    background-color: #FDFAF0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-content {
+    position: relative;
+    bottom: 70px;
+    width: 800px;
+    height: 360px;
+    background-color: white;
+    border-radius: 30px;
+    padding: 30px;
+}
+
+.slogan-box {
+    display: inline-block;
+    width: 400px;
+    height: 100%;
+    background-image: url("../../../public/img/login-pic.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 20px 0px 0px 20px;
+}
+
+.loginbox {
+    width: 400px;
+    height: 100%;
+    background-color: #C4C197;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 0px 30px 30px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginbox h1 {
+    text-align: center;
+    font-size: 36px;
+    margin: 20px 0;
+    color: #403F2B;
+}
+
+.loginbox input {
+    border-radius: 20px;
+    margin: 5px 0px;
+    width: 300px;
+    height: 40px;
+    padding: 0 20px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+}
+
+.loginbox button {
+    width:300px;
+    height: 45px;
+    background-color: #FEFAF0;
+    color: #403F2B;
+    padding: 14px 20px;
+    margin: 25px 0 15px 0px;
+    border: none;
+    border-radius: 20px;
+}
+
+.loginbox span{
+    color: #403F2B;
+}
+
+.link-style {
+    text-decoration: none;
+    color: #FFFDC3;
+}
+
+.foget{
+    font-size: 10px;
+    color:FFFDC3;
+    margin-left: 150px;
+    margin-bottom: 3px;
+}
+
+.forget-style {
+    color: #403F2B;
+}

@@ -41,7 +41,7 @@ function ContactPage() {
                 </ul>
             </div>
             <div className="col">
-                <img src="/img/petsHuman.jpeg" />
+                <img alt="lovelyPets" src="/img/petsHuman.jpeg" />
             </div>
         </div>
     )

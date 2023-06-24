@@ -8,15 +8,12 @@ import ContactInfo from "./details-page/contactInfo"
 import authReducer from "./reducers/auth-reducer";
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
-<<<<<<< HEAD
 import Profile from "./profile-page/profile";
 import ManagementDashboard from "./management-page.js/dashboard"
 import ProtectedRoute from "./protected-route"
 import AuthContext from "./auth-context"
 import UserProfile from "./profile-page/userProfile"
-=======
-import Search from "../PetSOS/search/search";
->>>>>>> 5bae204 (add search function)
+import Search from "./search/search";
 
 const store = configureStore({
     reducer: { user: authReducer }
@@ -34,13 +31,10 @@ function PetSOS() {
                         <Route path="/privatePolicy" element={<PrivatePolicy />} />
                         <Route path="/serviceTerm" element={<ServiceTerm />} />
                         <Route path="/contactInfo" element={<ContactInfo />} />
-<<<<<<< HEAD
                         <Route path="/profile" element={<ProtectedRoute> <Profile /></ProtectedRoute>} />
                         <Route path="/profile/:id" element={<UserProfile/>} />
                         <Route path="/management-dashboard" element={<ProtectedRoute><ManagementDashboard /></ProtectedRoute>} />
-=======
                         <Route path="/search" element={<Search />} />
->>>>>>> 5bae204 (add search function)
                     </Routes>
                 </div>
             </div>

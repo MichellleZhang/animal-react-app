@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import "./policy.css"
 function ServiceTerm() {
     return (
-        <div className="row container">
-            <div className="col col-1"></div>
-            <div className="col col-10">
+        <div className="container">
+            <div className="col align-self-start">
                 <h1>PETSOS TERMS & CONDITIONS</h1>
                 <p>These Terms & Conditions (“Terms”), sets forth the terms and conditions for your use of the website PetSOS and its related services (the “Website”). The Terms constitute a legally binding agreement between you and PetSOS.</p>
                 <p>Please read these Terms carefully. By using the Website, you agree to be bound by and comply with the Terms, which may be updated from time to time. If you do not consent to these Terms, please do not use the Website.</p>
@@ -80,7 +79,6 @@ function ServiceTerm() {
                     <span>Email: Services@petsos.com</span> <br />
                 </ol>
             </div>
-            <div className="col col-1"></div>
         </div>
     )
 

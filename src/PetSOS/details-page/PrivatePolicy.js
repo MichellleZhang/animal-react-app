@@ -2,9 +2,8 @@ import React from "react";
 import "./policy.css"
 function PrivatePolicy() {
     return (
-        <div className="row container">
-            <div className="col col-1"> </div>
-            <div className="col col-10">
+        <div className="container">
+            <div className="col align-self-start">
                 <h1>PETSOSS PRIVACY POLICY</h1>
                 <p>PetSOS ("PetSOS," "we," "us," or "our") is committed to safeguarding your privacy. This Privacy Policy explains
                     how we collect, use, and share your information when you visit our website (the "Website") and use our services.
@@ -80,7 +79,6 @@ function PrivatePolicy() {
                 <span>New York, NY 10128</span> <br />
                 <span>Email: privacy@petsos.com</span> <br />
             </div>
-            <div className="col col-1"> </div>
         </div>
     )
 }

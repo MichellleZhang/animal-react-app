@@ -12,7 +12,7 @@ const NavigationBar = () => {
   const { currentUser } = useSelector((state) => state.user);
   const { pathname } = useLocation();
   // const [, , active] = pathname.split("/");
-  const [,active] = pathname.split("/");
+  const [, active] = pathname.split("/");
 
   const handleLogout = () => {
     dispatch(logoutThunk());
@@ -20,15 +20,17 @@ const NavigationBar = () => {
   };
 
   return (
-    <div className="container">
-      <nav className="navbar navbar-expand-lg bg-body-light">
-        <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
-            <img src="/img/logo.png" alt="Logo" width="74" height="55" className="d-inline-block align-text-top logo" />
-            <span className="name">PetSOS</span>
-          </Link>
-          <div className="collapse navbar-collapse" id="navbarText">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+    <div>
+      <nav className="navbar navbar-expand-lg" style={{ "padding": "0px" }}>
+        <div className="container-fluid" style={{ "paddingRight": "62px" }}>
+          <div className="collapse navbar-collapse">
+            <Link className="navbar-brand" to="/">
+              <img src="/img/logo.png" alt="Logo" width="74" height="55" className="d-inline-block align-text-top logo" />
+              <span className="name">PetSOS</span>
+            </Link>
+          </div>
+          <div className="navbar-collapse" id="navbarText">
+            <div className="navbar-nav me-auto mb-2">
               <li className={`nav-item ${active === "home" || active === "" ? "active" : ""}`}>
                 <Link className="nav-link" to="/home">Home</Link>
               </li>
@@ -46,8 +48,14 @@ const NavigationBar = () => {
                   <div className="nav1">
                     <Link className="nav-link dropdown-toggle" aria-expanded="true" to="/profile">{currentUser.username}</Link>
                     <div className="nav2">
-                      <Link className="link" to="/profile"><button>Profile</button></Link>
-                      <button onClick={handleLogout}>Logout</button> 
+                      <Link className="link" to="/profile">
+                        <button>Profile</button>
+                      </Link>
+                      {currentUser.role === "Administrator" ?
+                        <Link className="link" to="/management-dashboard">
+                          <button>Management Dashboard</button>
+                        </Link> : ""}
+                      <button onClick={handleLogout}>Logout</button>
                     </div>
                   </div>
                 </li>
@@ -56,7 +64,7 @@ const NavigationBar = () => {
                   <Link className="nav-link" to="/login">Log in</Link>
                 </li>
               )}
-            </ul>
+            </div>
           </div>
         </div >
       </nav >

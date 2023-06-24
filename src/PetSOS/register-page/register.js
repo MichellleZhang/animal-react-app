@@ -23,7 +23,7 @@ function Register() {
         try {
             await dispatch(registerThunk({ username, lastName, firstName, state, zipCode, phoneNumber, email, password, role }));
             setTimeout(() => {
-                navigate("/home");
+                navigate("/profile");
             }, 1000);
         } catch (e) {
             alert(e);
@@ -31,7 +31,7 @@ function Register() {
     };
 
     return (
-        <div className="content container">
+        <div className="content">
             <div className="register-content">
                 <div className="register-wrapper">
                     <h1>Register</h1>

@@ -1,0 +1,32 @@
+.boxbox {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 80px;
+}
+
+.compBetween {
+  margin: 20px auto;
+  align-items: center;
+  direction: row;
+}
+
+h1 {
+  margin: 30px 0 0;
+  color: #403f2b;
+  padding-top: 10px;
+}
+
+h3 {
+  color: #403f2b;
+}
+
+input {
+  color: #403f2b;
+}
+
+label {
+  color: #403f2b;
+}

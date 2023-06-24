@@ -2,15 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import * as authService from "./auth-service"
 
 export const loginThunk = createAsyncThunk("user/login", async (credentials) => {
-    try {
-        console.log("1.1")
         const currenUser = await authService.login(credentials);
         return currenUser;
-    }
-    catch {
-        console.log("1.1111111")
-        return new Error("Invalid credentials");
-    }
 }
 );
 export const logoutThunk = createAsyncThunk("auth/logout", async () => {

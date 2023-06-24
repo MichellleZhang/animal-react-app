@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import './login.css';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginThunk } from "../services/auth-thunk";
 
 function Login() {
     const [account, setAccount] = useState("");
     const [password, setPassword] = useState("");
     const [loginError, setLoginError] = useState(false);
+    const {error, currentUser} = useSelector(state => state.user)
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleLogin = async () => {
@@ -51,7 +52,8 @@ function Login() {
                         <Link to="/contactInfo" className="forget-style">Forget Password ?</Link>
                     </div>
                     <div className="message">
-                        {loginError ? "*Incorrect username or password" : ""}
+                    {loginError || error ? "*Incorrect username or password" : ""}
+                    { error ? <>{JSON.stringify(error, null, 2)}</> : ""}
                     </div>
                     <div>
                         <button onClick={handleLogin}>LOGIN</button>

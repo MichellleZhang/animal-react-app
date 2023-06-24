@@ -8,23 +8,18 @@ import ContactInfo from "./details-page/contactInfo"
 import authReducer from "./reducers/auth-reducer";
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
-<<<<<<< HEAD
-<<<<<<< HEAD
 import Profile from "./profile-page/profile";
 import ManagementDashboard from "./management-page.js/dashboard"
 import Search from "../PetSOS/search/search";
 import LostPet from "./lost-pet";
 import HomePage from "./home-page/home-page";
-
-=======
->>>>>>> 7bd2fe7 (version 0.1)
-=======
 import Profile from "./profile-page/profile";
 import ManagementDashboard from "./management-page.js/dashboard"
 import ProtectedRoute from "./protected-route"
 import AuthContext from "./auth-context"
 import UserProfile from "./profile-page/userProfile"
->>>>>>> 37174b0 (version 0.2)
+import Search from "../PetSOS/search/search";
+
 
 const store = configureStore({
     reducer: { user: authReducer }
@@ -48,6 +43,7 @@ function PetSOS() {
                         <Route path="/search" element={<Search />} />
                         <Route path="/myPets" element={<Mypets/>} />
                         <Route path="/details/:id" element={<PetDetails />} />
+                        <Route path="/search" element={<Search />} />
                     </Routes>
                 </div>
             </div>

@@ -3,6 +3,8 @@ import { BrowserRouter, Navigate } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import PetSOS from './PetSOS';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 function App() {
   return (
     <BrowserRouter>

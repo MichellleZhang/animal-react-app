@@ -37,6 +37,7 @@ const ManagementDashboard = () => {
         }
     };
 
+
     const handleEditUser = async (user) => {
         setNewUser(user);
     };
@@ -45,7 +46,6 @@ const ManagementDashboard = () => {
         await modifyUser(newUser._id, newUser);
         setUsers(users.map((user) => (user._id === newUser._id ? newUser : user)));
     };
-
     useEffect(() => {
         const fetchUsers = async () => {
             const users = await getUsers();

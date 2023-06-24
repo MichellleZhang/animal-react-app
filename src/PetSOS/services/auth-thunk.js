@@ -7,8 +7,8 @@ export const loginThunk = createAsyncThunk("user/login", async (credentials) => 
 }
 );
 export const logoutThunk = createAsyncThunk("auth/logout", async () => {
-    await authService.logout();
-}
+        await authService.logout();
+    }
 );
 export const profileThunk = createAsyncThunk("auth/profile", async () => {
     const currenUser = await authService.profile();
@@ -17,9 +17,9 @@ export const profileThunk = createAsyncThunk("auth/profile", async () => {
 );
 
 export const updateUserThunk = createAsyncThunk("user/updateUser", async (user) => {
-    await authService.updateUser(user._id, user);
-    return user;
-}
+        await authService.updateUser(user._id, user);
+        return user;
+    }
 );
 
 export const modifyUserThunk = createAsyncThunk("user/modifyUser", async (user) => {

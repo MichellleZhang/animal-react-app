@@ -36,6 +36,7 @@ export const getUsers = async () => {
     return response.data;
 };
 
+
 export const filterUsers = async ({condition, value}) => {
     const response = await axios.get(`${USERS_URL}/searchUsers`,{params:{condition, value}});
     console.log("users2",response.data)

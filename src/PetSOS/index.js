@@ -27,12 +27,16 @@ import Search from "../PetSOS/search/search";
 
 =======
 import Search from "./search/search";
+<<<<<<< HEAD
 >>>>>>> c0cb5ac (version 0.3)
 =======
 import PublicProfile from "./profile-page/Profile-public"
 import Search from "./search/search";
 import Mypets from "./myPet-page/myPets"
 >>>>>>> 537d87a (Committing local changes before merging)
+=======
+import PetDetails from "./details-page/petsDetail";
+>>>>>>> 0e5dbc2 (search page linked with detail page)
 
 const store = configureStore({
     reducer: { user: authReducer }

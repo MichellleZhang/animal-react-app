@@ -79,12 +79,7 @@ function ServiceTerm() {
                     <span>Email: Services@petsos.com</span> <br />
                 </ol>
             </div>
-<<<<<<< HEAD
-=======
-            <div className="col col-1"></div>
->>>>>>> 7bd2fe7 (version 0.1)
         </div>
     )
-
 }
 export default ServiceTerm;

@@ -9,6 +9,7 @@ import authReducer from "./reducers/auth-reducer";
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Profile from "./profile-page/profile";
 import ManagementDashboard from "./management-page.js/dashboard"
 import Search from "../PetSOS/search/search";
@@ -17,6 +18,13 @@ import HomePage from "./home-page/home-page";
 
 =======
 >>>>>>> 7bd2fe7 (version 0.1)
+=======
+import Profile from "./profile-page/profile";
+import ManagementDashboard from "./management-page.js/dashboard"
+import ProtectedRoute from "./protected-route"
+import AuthContext from "./auth-context"
+import UserProfile from "./profile-page/userProfile"
+>>>>>>> 37174b0 (version 0.2)
 
 const store = configureStore({
     reducer: { user: authReducer }
@@ -24,6 +32,7 @@ const store = configureStore({
 function PetSOS() {
     return (
         <Provider store={store}>
+            <AuthContext>
             <div >
                 <NavigationBar />
                 <div>
@@ -42,6 +51,7 @@ function PetSOS() {
                     </Routes>
                 </div>
             </div>
+            </AuthContext>
         </Provider>
     )
 }

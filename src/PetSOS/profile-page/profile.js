@@ -29,13 +29,14 @@ function Profile() {
     }, [currentUser]);
 
     return (
-        <div className="container">
-            <h1>My Profile</h1>
-            <div class="nav nav-tabs">
-                <Link class="nav-link active" style={{ "color": "#403F2B" }} to="/profile">My Information</Link>
-                <Link class="nav-link" style={{ "color": "#403F2B" }} to="/posts">My Posts</Link>
+        <div className="boxbox">
+            <div>
+                <h1>My Profile</h1>
+                <div class="nav nav-tabs">
+                    <Link class="nav-link active" style={{ "color": "#403F2B" }} to="/profile">My Information</Link>
+                    <Link class="nav-link" style={{ "color": "#403F2B" }} to="/posts">My Posts</Link>
+                </div>
             </div>
-
             <div>
                 <h3 className="compBetween">Personal Information</h3>
                 <div className="row compBetween">
@@ -104,9 +105,9 @@ function Profile() {
                         <label>Zip code</label>
                     </div>
                     <div class="col-7">
-                        <input type="text" value={profile.ZipCode} className="form-control"
+                        <input type="text" value={profile.zipCode} className="form-control"
                             onChange={(event) => {
-                                const newProfile = { ...profile, ZipCode: event.target.value };
+                                const newProfile = { ...profile, zipCode: event.target.value };
                                 setProfile(newProfile);
                             }} />
                     </div>

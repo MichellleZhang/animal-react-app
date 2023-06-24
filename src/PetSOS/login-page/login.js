@@ -17,13 +17,19 @@ function Login() {
             return;
         } else {
             try {
+                console.log("1"); 
                 await dispatch(loginThunk({ account, password }));
+                console.log("2"); 
                 navigate("/profile");
             } catch (error) {
-                setLoginError(true);
+                console.log("3"); 
+                console.log(error); 
+                console.log(error.response); 
+                console.log(error.response.data);
+                console.log(error.response.data.message);
             }
         }
-    };
+    }
     return (
         <div className="content">
             <div className="login-content">
@@ -56,6 +62,7 @@ function Login() {
                     </div>
                 </div>
             </div>
+
         </div>
     )
 }

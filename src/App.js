@@ -10,6 +10,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/*" element={<PetSOS />} />
+          <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
       </div>
     </BrowserRouter>

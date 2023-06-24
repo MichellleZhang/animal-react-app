@@ -5,11 +5,7 @@
 
 .content {
     width: 100vw;
-<<<<<<< HEAD
     height:100vh;
-=======
-    height: 87vh;
->>>>>>> 7bd2fe7 (version 0.1)
     background-color: #FDFAF0;
     display: flex;
     justify-content: center;

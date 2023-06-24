@@ -50,7 +50,7 @@ export const deleteUser = async (id) => {
 
 export const accessUser = async (id) => {
     const response = await axios.get(`${USERS_URL}/${id}`);
-    console.log("response",response)
+    console.log(response.data)
     return response.data;
 };
 

@@ -41,20 +41,20 @@ function Register() {
                             <div>
                                 <label className="label" htmlFor="username">Username</label>
                                 <input className="custom-input" type="text" placeholder="Username" id="username" value={username}
-                                    onChange={(event) => setUsername(event.target.value)} />
+                                       onChange={(event) => setUsername(event.target.value)} />
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-6">
                                 <label className="label" htmlFor="firstname">First Name</label>
                                 <input className="custom-input" type="text" placeholder="First name" id="firstname" value={firstName}
-                                    onChange={(event) => setFirstname(event.target.value)}
+                                       onChange={(event) => setFirstname(event.target.value)}
                                 />
                             </div>
                             <div className="col-6">
                                 <label className="label" htmlFor="lastname">Last Name</label>
                                 <input className="custom-input" type="text" placeholder="Last name" id="lastname" value={lastName}
-                                    onChange={(event) => setLastname(event.target.value)}
+                                       onChange={(event) => setLastname(event.target.value)}
                                 />
                             </div>
                         </div>
@@ -70,7 +70,7 @@ function Register() {
                             <div className="col-6">
                                 <label className="label" htmlFor="zipcode" value={zipCode}>Zip Code</label>
                                 <input className="custom-input" type="text" id="zipcode" placeholder="ZIP Code"
-                                    onChange={(event) => setZipCode(event.target.value)}
+                                       onChange={(event) => setZipCode(event.target.value)}
                                 />
                             </div>
                         </div>
@@ -78,7 +78,7 @@ function Register() {
                             <div>
                                 <label className="label" htmlFor="phoneNumber" value={phoneNumber}>Phone Number</label>
                                 <input className="custom-input" type="input" placeholder="Phone Number" id="phoneNumber"
-                                    onChange={(event) => setNumber(event.target.value)}
+                                       onChange={(event) => setNumber(event.target.value)}
                                 />
                             </div>
                         </div>
@@ -86,7 +86,7 @@ function Register() {
                             <div>
                                 <label className="label" htmlFor="email" value={email}>Email</label>
                                 <input className="custom-input" type="email" placeholder="Email" id="email"
-                                    onChange={(event) => setEmail(event.target.value)}
+                                       onChange={(event) => setEmail(event.target.value)}
                                 />
                             </div>
                         </div>
@@ -94,7 +94,7 @@ function Register() {
                             <div>
                                 <label className="label" htmlFor="password" value={email}>Password</label>
                                 <input className="custom-input" type="Password" placeholder="Password" id="password"
-                                    onChange={(event) => setPassword(event.target.value)}
+                                       onChange={(event) => setPassword(event.target.value)}
                                 />
                             </div>
                         </div>
@@ -103,12 +103,12 @@ function Register() {
                         </div>
                         <div className="form-check form-check-inline">
                             <input className="form-check-input" type="radio" value="Volunteer" name="radio-role" id="role-volunteer"
-                                onChange={() => setRole("Volunteer")} />
+                                   onChange={() => setRole("Volunteer")} />
                             <label className="form-check-label" htmlFor="role-volunteer"> Volunteer </label>
                         </div>
                         <div className="form-check form-check-inline">
                             <input className="form-check-input" type="radio" value="PetOwner" name="radio-role" id="role-owner"
-                                onChange={() => setRole("PetOwner")} />
+                                   onChange={() => setRole("PetOwner")} />
                             <label className="form-check-label" htmlFor="role-owner"> Pet Owner </label>
                         </div>
                     </div>

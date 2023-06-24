@@ -14,6 +14,7 @@ import ProtectedRoute from "./protected-route"
 import AuthContext from "./auth-context"
 import UserProfile from "./profile-page/userProfile"
 import Search from "./search/search";
+import PetDetails from "./details-page/petsDetail";
 
 const store = configureStore({
     reducer: { user: authReducer }
@@ -35,6 +36,7 @@ function PetSOS() {
                         <Route path="/profile/:id" element={<UserProfile/>} />
                         <Route path="/management-dashboard" element={<ProtectedRoute><ManagementDashboard /></ProtectedRoute>} />
                         <Route path="/search" element={<Search />} />
+                        <Route path="/details/:id" element={<PetDetails />} />
                     </Routes>
                 </div>
             </div>

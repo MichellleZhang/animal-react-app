@@ -38,7 +38,7 @@ function Login() {
                     <h1>Login</h1>
                     <div>
                         <input className="form-control" type="text" placeholder="Username or Email" value={account}
-                            onChange={(event) => setAccount(event.target.value)} />
+                               onChange={(event) => setAccount(event.target.value)}/>
                     </div>
                     <div className="foget">
                         <Link to="/contactInfo" className="forget-style">Forget Username or Email ?</Link>

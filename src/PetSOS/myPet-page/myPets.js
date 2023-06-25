@@ -10,6 +10,7 @@ function Mypets() {
     const [image, setImage] = useState("");
     const [sex, setSex] = useState("");
     const [description, setDescription] = useState("");
+
     const handleImageUpload = (event) => {
         const imageFile = event.target.files[0];
         convertImageToBase64(imageFile);
@@ -34,14 +35,15 @@ function Mypets() {
         }
     };
 
-    // const fetchMypets = async()=>{
-    //     const mypets= await findIAllMyPets();
-    //     setMypets(mypets)
-    // }
+    const fetchMypets = async () => {
+        const mypets = await findIAllMyPets();
+        console.log("mypetsssss",mypets)
+        setMypets(mypets)
+    }
 
-    // useEffect(()=>{
-    //     fetchMypets();
-    // })
+    useEffect(() => {
+        fetchMypets();
+    })
 
     return (
         <div>
@@ -80,7 +82,8 @@ function Mypets() {
                 </div>
             </div>
             <div className="box row">
-            <h3>My pets Lists</h3>
+                <h3>My pets Lists</h3>
+                <pre>{JSON.stringify(myPets, null, 2)}</pre>
             </div>
         </div>
     );

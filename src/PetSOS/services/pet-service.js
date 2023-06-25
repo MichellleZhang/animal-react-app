@@ -31,7 +31,7 @@ export const createMyPets = async ({ name, type, image, sex, description }) => {
 };
 
 export const findIAllMyPets = async () => {
-  console.log("执行到了这里")
-  const response = await request.get(`${PETS_API}/myallMypets`);
+  // console.log("执行到了这里")
+  const response = await request.get(`${PETS_API}/myallMypets1`);
   return response.data;
 }

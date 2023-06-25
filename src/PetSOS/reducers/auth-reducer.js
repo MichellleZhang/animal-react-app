@@ -16,6 +16,7 @@ const authSlice = createSlice({
             state.error = null;
         },
         [loginThunk.fulfilled]: (state, { payload }) => {
+            console.log("xieru"+payload.message)
             state.currentUser = payload;
             state.user = payload;
             state.loading = false;
@@ -27,6 +28,10 @@ const authSlice = createSlice({
             state.error = null;
         },
         [loginThunk.rejected]: (state, action) => {
+            debugger
+            console.log("ac"+action)
+            console.log("sta"+state)
+
             state.error = action.error;
             state.currentUser = null;
         },

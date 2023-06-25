@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "./profile.css"
 import { profileThunk, updateUserThunk } from "../services/auth-thunk";
 import states from '../register-page/states.json';

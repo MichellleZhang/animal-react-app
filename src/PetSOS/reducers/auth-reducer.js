@@ -32,7 +32,8 @@ const authSlice = createSlice({
             state.currentUser = null
 =======
         [loginThunk.rejected]: (state, action) => {
-            state.error = action.error;
+            console.log(action)
+            state.error = action.payload;
             state.currentUser = null;
 >>>>>>> 37174b0 (version 0.2)
         },

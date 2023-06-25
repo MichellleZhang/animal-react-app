@@ -8,35 +8,21 @@ import ContactInfo from "./details-page/contactInfo"
 import authReducer from "./reducers/auth-reducer";
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
-<<<<<<< HEAD
 import Profile from "./profile-page/profile";
 import ManagementDashboard from "./management-page.js/dashboard"
 import Search from "../PetSOS/search/search";
 import LostPet from "./lost-pet";
 import HomePage from "./home-page/home-page";
-=======
->>>>>>> c0cb5ac (version 0.3)
 import Profile from "./profile-page/profile";
 import ManagementDashboard from "./management-page.js/dashboard"
 import ProtectedRoute from "./protected-route"
 import AuthContext from "./auth-context"
-<<<<<<< HEAD
 import UserProfile from "./profile-page/userProfile"
-<<<<<<< HEAD
-import Search from "../PetSOS/search/search";
-
-=======
 import Search from "./search/search";
-<<<<<<< HEAD
->>>>>>> c0cb5ac (version 0.3)
-=======
 import PublicProfile from "./profile-page/Profile-public"
 import Search from "./search/search";
 import Mypets from "./myPet-page/myPets"
->>>>>>> 537d87a (Committing local changes before merging)
-=======
 import PetDetails from "./details-page/petsDetail";
->>>>>>> 0e5dbc2 (search page linked with detail page)
 
 const store = configureStore({
     reducer: { user: authReducer }

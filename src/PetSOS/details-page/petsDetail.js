@@ -33,7 +33,6 @@ function PetDetails() {
     const location = useLocation();
     const {localSearchResults, remoteSearchResults} = location.state;
 
-    console.log("remoteSearchResultssssss",typeof(remoteSearchResults.id));
     const petData = findPet(id, localSearchResults, remoteSearchResults);
 
     console.log("Rendering component, isLiked:", isLiked);

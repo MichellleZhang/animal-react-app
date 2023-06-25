@@ -158,6 +158,7 @@ function Search() {
                       </ul>
                       <Link
                         to={`/details/${pet._id}`}
+                        state={{localSearchResults:localPets}}
                         className="btn btn-primary"
                       >
                         View Details
@@ -218,6 +219,7 @@ function Search() {
                       </ul>
                       <Link
                         to={`/details/${pet.id}`}
+                        state={{remoteSearchResults:apiPets}}
                         className="btn btn-primary"
                       >
                         View Details

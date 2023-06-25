@@ -1,25 +1,43 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios';
 import {useParams} from 'react-router-dom';
 import "./petsDetail.css";
 import {useSelector, useDispatch} from "react-redux";
-import LovePet from "./lovePet";
-import {lovePetThunk} from "../services/lovePet-thunk";
+import {getLikedPetsByUser, likePet, unlikePet} from "../services/likePet-thunk";
+import * as likeService from "../services/likePet-service";
 import {useNavigate} from 'react-router-dom';
 import {Link} from "react-router-dom";
 import {useLocation} from 'react-router-dom';
+import {FaRegStar, FaStar} from "react-icons/fa";
 
 function PetDetails() {
 
     const dispatch = useDispatch();
-    const {currentUser} = useSelector(state => state.user);
-
+    const {currentUser} = useSelector((state) => state.user);
     const {id} = useParams();
+    const {loading} = useSelector((state) => state.like);
+
+    const likeState = useSelector((state) => state.like);
+    console.log("likeState", likeState);
+
+    const isLiked = useSelector((state) => {
+        console.log('Complete liked pets array:', state.like.petLiked);
+        const like = state.like.petLiked.find((like) => like.petId._id.toString() === id);
+        console.log('Comparing IDs for likeness:', like ? like.petId._id.toString() : 'No like found', id);
+        return like;
+    });
+
+    console.log("isLiked", isLiked);
+
     const navigate = useNavigate();
 
     const location = useLocation();
     const {localSearchResults, remoteSearchResults} = location.state;
+
     console.log("remoteSearchResultssssss",typeof(remoteSearchResults.id));
+    const petData = findPet(id, localSearchResults, remoteSearchResults);
+
+    console.log("Rendering component, isLiked:", isLiked);
+
 
     const getGoogleMapImageUrl = (address) => {
         const baseUrl = "https://maps.googleapis.com/maps/api/staticmap";
@@ -27,7 +45,6 @@ function PetDetails() {
         const size = "size=600x300";
         const zoom = "zoom=13";
         const apiKey = "key=AIzaSyBZCP64z0FS8szDXVFjP7i9miHY0RQal_Y";
-
         return `${baseUrl}?${marker}&${zoom}&${size}&${apiKey}`;
     }
 
@@ -35,9 +52,29 @@ function PetDetails() {
         if (!currentUser) {
             navigate('/login');
         } else {
-
         }
     };
+
+
+    const handleLike = async () => {
+        try {
+            const {data} = await likeService.likePets(currentUser._id, petData, currentUser.role);
+            dispatch({type: 'LIKE_PET', payload: data});
+            dispatch(getLikedPetsByUser(currentUser._id));  // Ensure this is called
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const handleUnlike = async () => {
+        try {
+            await dispatch(unlikePet(currentUser._id, id, currentUser.role));
+            // The unlikePet action should be responsible for sending a request to the server
+            // and updating the Redux state
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
 
     if (!location.state) {
@@ -54,12 +91,19 @@ function PetDetails() {
                     </Link>
                 </div>
 
-                <h1>{`${localPetData.status} ${localPetData.type} in ${localPetData.area}`} <LovePet/></h1>
+                <h1>{`${localPetData.status} ${localPetData.type} in ${localPetData.area}`}</h1>
                 <div className="container">
                     <div className="row">
                         <div className="col-4">
                             <img src={`/img/${localPetData.image}`} alt={localPetData.name} style={{margin: 20}}
                                  className="img-fluid rounded mx-auto d-block"/>
+                            {currentUser && (
+                                isLiked ? (
+                                <button onClick={handleUnlike}><FaStar/></button> // Button appears filled
+                                ) : (
+                                <button onClick={handleLike}><FaRegStar/></button> // Button appears unfilled
+                                )
+                            )}
                         </div>
                         <div className="col-8" style={{padding: 20}}>
                             <div className="row">
@@ -119,10 +163,7 @@ function PetDetails() {
             </div>)
 
     } else if (remoteSearchResults) {
-        console.log("Before find");
-        console.log(remoteSearchResults);
-        console.log(id);
-        const remotePetData = remoteSearchResults.find(p => p.id.toString() === id);
+        const remotePetData = findRemotePet(id, remoteSearchResults);
         console.log(remotePetData);
         return (
             <div>
@@ -131,15 +172,15 @@ function PetDetails() {
                         <button>Back to Search</button>
                     </Link>
                 </div>
-                <h1>{`${remotePetData.status} ${remotePetData.species} in ${remotePetData.contact.address.city}, ${remotePetData.contact.address.state} ${remotePetData.contact.address.postcode}`}
-                    <LovePet/></h1>
+                <h1>{`${remotePetData.status} ${remotePetData.species} in ${remotePetData.contact.address.city}, ${remotePetData.contact.address.state} ${remotePetData.contact.address.postcode}`}</h1>
                 <div className="container">
                     <div className="row">
                         <div className="col-4">
-                            <img src={ remotePetData.photos[0] ? remotePetData.photos[0].large : ""}
+                            <img src={remotePetData.photos[0] ? remotePetData.photos[0].large : ""}
                                  alt={`${remotePetData.name} - ${remotePetData.breeds.primary}`}
                                  style={{margin: 20}}
                                  className="img-fluid rounded mx-auto d-block"/>
+                            <button onClick={handleLike}>{isLiked ? <FaStar/> : <FaRegStar/>}</button>
                         </div>
                         <div className="col-8" style={{padding: 20}}>
                             <div className="row">
@@ -171,7 +212,7 @@ function PetDetails() {
                                     <strong>Address:</strong>
                                 </div>
                                 <div className="col-8 pet-info">
-                                    {remotePetData.contact.address.address1}, {remotePetData.contact.address.city},  {remotePetData.contact.address.state}  {remotePetData.contact.address.postcode}
+                                    {remotePetData.contact.address.address1}, {remotePetData.contact.address.city}, {remotePetData.contact.address.state} {remotePetData.contact.address.postcode}
                                     <img
                                         src={getGoogleMapImageUrl(`${remotePetData.contact.address.address1}, ${remotePetData.contact.address.city}, ${remotePetData.contact.address.state} ${remotePetData.contact.address.postcode}`)}
                                         style={{margin: 5, paddingBottom: 10}} alt="Location on Map"/>
@@ -183,7 +224,7 @@ function PetDetails() {
                                 </div>
                                 <div className="col-8 button-container">
                                     <a href={remotePetData.url} target="_blank" rel="noopener noreferrer">
-                                    <button className="contact" >Contact Owner</button>
+                                        <button className="contact">Contact Owner</button>
                                     </a>
                                 </div>
                             </div>
@@ -193,6 +234,27 @@ function PetDetails() {
             </div>
         )
     }
+}
+
+function findLocalPet(id, localResults) {
+    return localResults.find(p => p._id === id);
+}
+
+function findRemotePet(id, remoteResults) {
+    // If remoteResults is an array, use .find
+    if (Array.isArray(remoteResults)) {
+        return remoteResults.find(p => p.id.toString() === id);
+    }
+    // If remoteResults is a single object, check its id directly
+    else if (remoteResults.id.toString() === id) {
+        return remoteResults;
+    }
+}
+
+function findPet(id, localResults, remoteResults) {
+    if (localResults) return findLocalPet(id, localResults);
+    if (remoteResults) return findRemotePet(id, remoteResults);
+    return null;
 }
 
 export default PetDetails;

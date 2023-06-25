@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router";
+import {Routes, Route} from "react-router";
 import Login from "../PetSOS/login-page/login";
 import Register from "../PetSOS/register-page/register";
 import PrivatePolicy from "../PetSOS/details-page/PrivatePolicy"
@@ -19,10 +19,15 @@ import Search from "./search/search";
 import Mypets from "./myPet-page/myPets"
 import PetDetails from "./details-page/petsDetail";
 import Myposts from "./profile-page/my-posts"
+import likePetReducer from './reducers/likePet-reducer';
 
 const store = configureStore({
-    reducer: { user: authReducer }
+    reducer: {
+        user: authReducer,
+        like: likePetReducer
+    }
 });
+
 function PetSOS() {
     return (
         <Provider store={store}>
@@ -45,7 +50,6 @@ function PetSOS() {
                             <Route path="/home" element={<HomePage />} />
                             <Route path="/reportLost" element={<LostPet />} />
                             <Route path="/myposts" element={<Myposts/>} />
-
                         </Routes>
                     </div>
                 </div>
@@ -53,4 +57,5 @@ function PetSOS() {
         </Provider>
     )
 }
+
 export default PetSOS;

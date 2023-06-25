@@ -8,21 +8,17 @@ import ContactInfo from "./details-page/contactInfo"
 import authReducer from "./reducers/auth-reducer";
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
-import Profile from "./profile-page/profile";
 import ManagementDashboard from "./management-page.js/dashboard"
-import Search from "../PetSOS/search/search";
 import LostPet from "./lost-pet";
 import HomePage from "./home-page/home-page";
 import Profile from "./profile-page/profile";
-import ManagementDashboard from "./management-page.js/dashboard"
 import ProtectedRoute from "./protected-route"
 import AuthContext from "./auth-context"
-import UserProfile from "./profile-page/userProfile"
-import Search from "./search/search";
 import PublicProfile from "./profile-page/Profile-public"
 import Search from "./search/search";
 import Mypets from "./myPet-page/myPets"
 import PetDetails from "./details-page/petsDetail";
+import Myposts from "./profile-page/my-posts"
 
 const store = configureStore({
     reducer: { user: authReducer }
@@ -31,25 +27,28 @@ function PetSOS() {
     return (
         <Provider store={store}>
             <AuthContext>
-            <div >
-                <NavigationBar />
-                <div>
-                    <Routes>
-                    <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/privatePolicy" element={<PrivatePolicy />} />
-                        <Route path="/serviceTerm" element={<ServiceTerm />} />
-                        <Route path="/contactInfo" element={<ContactInfo />} />
-                        <Route path="/profile" element={<ProtectedRoute> <Profile /></ProtectedRoute>} />
-                        <Route path="/profile/:id" element={<PublicProfile/>} />
-                        <Route path="/management-dashboard" element={<ProtectedRoute><ManagementDashboard /></ProtectedRoute>} />
-                        <Route path="/search" element={<Search />} />
-                        <Route path="/myPets" element={<Mypets/>} />
-                        <Route path="/details/:id" element={<PetDetails />} />
-                        <Route path="/search" element={<Search />} />
-                    </Routes>
+                <div >
+                    <NavigationBar />
+                    <div>
+                        <Routes>
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/register" element={<Register />} />
+                            <Route path="/privatePolicy" element={<PrivatePolicy />} />
+                            <Route path="/serviceTerm" element={<ServiceTerm />} />
+                            <Route path="/contactInfo" element={<ContactInfo />} />
+                            <Route path="/profile" element={<ProtectedRoute> <Profile /></ProtectedRoute>} />
+                            <Route path="/profile/:id" element={<PublicProfile />} />
+                            <Route path="/management-dashboard" element={<ProtectedRoute><ManagementDashboard /></ProtectedRoute>} />
+                            <Route path="/myPets" element={<Mypets />} />
+                            <Route path="/details/:id" element={<PetDetails />} />
+                            <Route path="/search" element={<Search />} />
+                            <Route path="/home" element={<HomePage />} />
+                            <Route path="/reportLost" element={<LostPet />} />
+                            <Route path="/myposts" element={<Myposts />} />
+
+                        </Routes>
+                    </div>
                 </div>
-            </div>
             </AuthContext>
         </Provider>
     )

@@ -26,16 +26,9 @@ const authSlice = createSlice({
             state.loading = false;
             state.error = null;
         },
-<<<<<<< HEAD
         [loginThunk.rejected]: (state, { payload }) => {
             state.error = { payload }.error
             state.currentUser = null
-=======
-        [loginThunk.rejected]: (state, action) => {
-            console.log(action)
-            state.error = action.payload;
-            state.currentUser = null;
->>>>>>> 37174b0 (version 0.2)
         },
         [registerThunk.fulfilled]: (state, { payload }) => {
             state.currentUser = payload;

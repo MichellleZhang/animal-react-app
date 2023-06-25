@@ -19,7 +19,7 @@ function PetDetails() {
 
     const location = useLocation();
     const {localSearchResults, remoteSearchResults} = location.state;
-    console.log(remoteSearchResults);
+    console.log("remoteSearchResultssssss",typeof(remoteSearchResults.id));
 
     const getGoogleMapImageUrl = (address) => {
         const baseUrl = "https://maps.googleapis.com/maps/api/staticmap";

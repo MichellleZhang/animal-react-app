@@ -19,6 +19,10 @@ export const profile = async () => {
     const response = await api.post(`${USERS_URL}/profile`);
     return response.data;
 };
+export const updateUser = async (uid, user) => {
+    const response = await api.put(`${USERS_URL}/${uid}`, user);
+    return response.data;
+};
 
 export const modifyUser = async (uid, user) => {
     const response = await api.put(`${USERS_URL}/modify/${uid}`, user);

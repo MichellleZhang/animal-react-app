@@ -54,7 +54,7 @@ function PetDetails() {
                     </Link>
                 </div>
 
-                <h1>{`${localPetData.status} ${localPetData.type} in ${localPetData.area}`} <LovePet/></h1>
+                {/* <h1>{`${localPetData.status} ${localPetData.type} in ${localPetData.area}`} <LovePet/></h1> */}
                 <div className="container">
                     <div className="row">
                         <div className="col-4">
@@ -131,8 +131,8 @@ function PetDetails() {
                         <button>Back to Search</button>
                     </Link>
                 </div>
-                <h1>{`${remotePetData.status} ${remotePetData.species} in ${remotePetData.contact.address.city}, ${remotePetData.contact.address.state} ${remotePetData.contact.address.postcode}`}
-                    <LovePet/></h1>
+                {/* <h1>{`${remotePetData.status} ${remotePetData.species} in ${remotePetData.contact.address.city}, ${remotePetData.contact.address.state} ${remotePetData.contact.address.postcode}`}
+                    <LovePet/></h1> */}
                 <div className="container">
                     <div className="row">
                         <div className="col-4">

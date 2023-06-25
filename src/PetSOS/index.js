@@ -44,7 +44,7 @@ function PetSOS() {
                             <Route path="/search" element={<Search />} />
                             <Route path="/home" element={<HomePage />} />
                             <Route path="/reportLost" element={<LostPet />} />
-                            <Route path="/myposts" element={<Myposts />} />
+                            <Route path="/myposts" element={<Myposts/>} />
 
                         </Routes>
                     </div>

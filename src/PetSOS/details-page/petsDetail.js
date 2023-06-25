@@ -19,7 +19,11 @@ function PetDetails() {
 
     const location = useLocation();
     const {localSearchResults, remoteSearchResults} = location.state;
+<<<<<<< HEAD
     console.log("remoteSearchResultssssss",typeof(remoteSearchResults.id));
+=======
+    console.log(remoteSearchResults);
+>>>>>>> origin/main
 
     const getGoogleMapImageUrl = (address) => {
         const baseUrl = "https://maps.googleapis.com/maps/api/staticmap";
@@ -54,7 +58,11 @@ function PetDetails() {
                     </Link>
                 </div>
 
+<<<<<<< HEAD
                 {/* <h1>{`${localPetData.status} ${localPetData.type} in ${localPetData.area}`} <LovePet/></h1> */}
+=======
+                <h1>{`${localPetData.status} ${localPetData.type} in ${localPetData.area}`} <LovePet/></h1>
+>>>>>>> origin/main
                 <div className="container">
                     <div className="row">
                         <div className="col-4">
@@ -131,8 +139,13 @@ function PetDetails() {
                         <button>Back to Search</button>
                     </Link>
                 </div>
+<<<<<<< HEAD
                 {/* <h1>{`${remotePetData.status} ${remotePetData.species} in ${remotePetData.contact.address.city}, ${remotePetData.contact.address.state} ${remotePetData.contact.address.postcode}`}
                     <LovePet/></h1> */}
+=======
+                <h1>{`${remotePetData.status} ${remotePetData.species} in ${remotePetData.contact.address.city}, ${remotePetData.contact.address.state} ${remotePetData.contact.address.postcode}`}
+                    <LovePet/></h1>
+>>>>>>> origin/main
                 <div className="container">
                     <div className="row">
                         <div className="col-4">

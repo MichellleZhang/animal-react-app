@@ -148,7 +148,11 @@ const ManagementDashboard = () => {
             </div>
             <div className="updateArea">
                 <h4 style={{ "color": "#403f2b" }}>Update Workplace</h4>
+<<<<<<< HEAD
                 <ul>
+=======
+                <ul className="list-group">
+>>>>>>> origin/main
                     <li className="list-group-item">
                         <button className="btn btn-success float-end" onClick={handleUpdateUser}>Update</button>
                         <input placeholder="Username" value={newUser.username}

@@ -23,6 +23,11 @@ export const unlikePets = async(userId, petId, role) => {
 };
 
 export const getLikedPets = async(userId) => {
-    return await api.get(`${LIKE_URL}/${userId}`);
+    return (await api.get(`${LIKE_URL}/${userId}`)).data;
+};
+
+
+export const checkIfUserLikedPet = async(userId, role, petId) => {
+    return (await api.get(`${LIKE_URL}/${userId}/${role}/${petId}`)).data.liked;
 };
 

@@ -1,13 +1,18 @@
+
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { accessUser } from "../services/auth-service";
 import { visitMypets } from "../services/pet-service";
 import { useSelector } from "react-redux";
+import * as likeService from "../services/likePet-service";
+
 
 function PublicProfile() {
     const [myPets, setMypets] = useState([])
     const [responseData, setresponseData] = useState("");
     const { currentUser } = useSelector((state) => state.user);
+    const [petLiked, setPetLiked] = useState([]);
+
     const { id } = useParams();
 
     // const handleAccess = async(id) =>{
@@ -23,6 +28,7 @@ function PublicProfile() {
             console.error('Error accessing user:', error);
         });
 
+
     const fetchVisitedMypets = async (id) => {
         const visitedmypets = await visitMypets(id);
         if (visitedmypets !== null) {
@@ -31,9 +37,18 @@ function PublicProfile() {
         }
     };
 
+    const fetchMyLikes = async () => {
+        const pets = await likeService.getLikedPets(id);
+        setPetLiked(pets);
+    }
+
     useEffect(() => {
         fetchVisitedMypets(id);
+        fetchMyLikes();
     }, []);
+
+
+
 
     return (
         <div className="box-public">
@@ -98,8 +113,8 @@ function PublicProfile() {
 
             <h3 className="compBetween">Posts</h3>
             <div> loading</div>
-            <h3 className="compBetween">Collection</h3>
-            <div> loading</div>
+            <h3 className="compBetween">Likes</h3>
+            <pre> {JSON.stringify(petLiked, null, 2)} </pre>
         </div>
     )
 }

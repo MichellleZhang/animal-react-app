@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import "./petsDetail.css";
-import {useSelector, useDispatch} from "react-redux";
-import {getLikedPetsByUser, likePet, unlikePet} from "../services/likePet-thunk";
+import {useSelector} from "react-redux";
 import * as likeService from "../services/likePet-service";
 import {useNavigate} from 'react-router-dom';
 import {Link} from "react-router-dom";
@@ -11,22 +10,9 @@ import {FaRegStar, FaStar} from "react-icons/fa";
 
 function PetDetails() {
 
-    const dispatch = useDispatch();
     const {currentUser} = useSelector((state) => state.user);
     const {id} = useParams();
-    const {loading} = useSelector((state) => state.like);
-
-    const likeState = useSelector((state) => state.like);
-    console.log("likeState", likeState);
-
-    const isLiked = useSelector((state) => {
-        console.log('Complete liked pets array:', state.like.petLiked);
-        const like = state.like.petLiked.find((like) => like.petId._id.toString() === id);
-        console.log('Comparing IDs for likeness:', like ? like.petId._id.toString() : 'No like found', id);
-        return like;
-    });
-
-    console.log("isLiked", isLiked);
+    const [isLiked, setIsLiked] = useState(false);
 
     const navigate = useNavigate();
 
@@ -34,8 +20,6 @@ function PetDetails() {
     const {localSearchResults, remoteSearchResults} = location.state;
 
     const petData = findPet(id, localSearchResults, remoteSearchResults);
-
-    console.log("Rendering component, isLiked:", isLiked);
 
 
     const getGoogleMapImageUrl = (address) => {
@@ -57,9 +41,8 @@ function PetDetails() {
 
     const handleLike = async () => {
         try {
-            const {data} = await likeService.likePets(currentUser._id, petData, currentUser.role);
-            dispatch({type: 'LIKE_PET', payload: data});
-            dispatch(getLikedPetsByUser(currentUser._id));  // Ensure this is called
+            await likeService.likePets(currentUser._id, petData, currentUser.role);
+            setIsLiked(true);
         } catch (error) {
             console.error(error);
         }
@@ -67,14 +50,24 @@ function PetDetails() {
 
     const handleUnlike = async () => {
         try {
-            await dispatch(unlikePet(currentUser._id, id, currentUser.role));
-            // The unlikePet action should be responsible for sending a request to the server
-            // and updating the Redux state
+            await likeService.unlikePets(currentUser._id, id, currentUser.role);
+            setIsLiked(false);
         } catch (error) {
             console.error(error);
         }
     }
 
+    const fetchIsliked = async () => {
+        if (!currentUser) {
+            return;
+        }
+        const data = await likeService.checkIfUserLikedPet(currentUser._id, currentUser.role, id);
+        setIsLiked(data);
+    }
+
+    useEffect(() => {
+        fetchIsliked();
+    }, [currentUser, id]);
 
     if (!location.state) {
         return <div>No data available. Please go back to the search page and click on a pet for details.</div>;
@@ -84,7 +77,7 @@ function PetDetails() {
         const localPetData = localSearchResults.find(p => p._id === id);
         return (
             <div>
-                <div className="button-container">
+                <div className="detailPage-button-container">
                     <Link to={"/search"}>
                         <button>Back to Search</button>
                     </Link>
@@ -94,16 +87,40 @@ function PetDetails() {
                 <div className="container">
                     <div className="row">
                         <div className="col-4">
-                            <img src={`/img/${localPetData.image}`} alt={localPetData.name} style={{margin: 20}}
-                                 className="img-fluid rounded mx-auto d-block"/>
-                            {currentUser && (
-                                isLiked ? (
-                                <button onClick={handleUnlike}><FaStar/></button> // Button appears filled
-                                ) : (
-                                <button onClick={handleLike}><FaRegStar/></button> // Button appears unfilled
-                                )
-                            )}
+                            <div style={{position: "relative", margin: 20}}>
+                                <img src={`/img/${localPetData.image}`} alt={localPetData.name}
+                                     className="img-fluid rounded mx-auto d-block"/>
+                                {currentUser && (
+                                    isLiked ? (
+                                        <button style={{
+                                            background: "rgba(255, 255, 255, 0.7)",
+                                            border: "none",
+                                            position: "absolute",
+                                            top: 0,
+                                            right: 0,
+                                            padding: "5px",
+                                            borderRadius: "50%"
+                                        }} onClick={handleUnlike}>
+                                            <FaStar style={{color: "#975A5E", fontSize: '2em'}}/>
+                                        </button>
+                                    ) : (
+                                        <button style={{
+                                            background: "rgba(255, 255, 255, 0.7)",
+                                            border: "none",
+                                            position: "absolute",
+                                            top: 0,
+                                            right: 0,
+                                            padding: "5px",
+                                            borderRadius: "50%"
+                                        }} onClick={handleLike}>
+                                            <FaRegStar style={{color: "#c4c197", fontSize: '2em'}}/>
+                                        </button>
+                                    )
+                                )}
+                            </div>
                         </div>
+
+
                         <div className="col-8" style={{padding: 20}}>
                             <div className="row">
                                 <div className="col-3 text-end pet-info">
@@ -152,7 +169,7 @@ function PetDetails() {
                                 <div className="col-3 text-end pet-info">
                                     <strong>Contact:</strong>
                                 </div>
-                                <div className="col-8 button-container">
+                                <div className="col-8 detailPage-button-container">
                                     <button className="contact" onClick={handleContactClick}>Contact Owner</button>
                                 </div>
                             </div>
@@ -163,23 +180,58 @@ function PetDetails() {
 
     } else if (remoteSearchResults) {
         const remotePetData = findRemotePet(id, remoteSearchResults);
-        console.log(remotePetData);
+
         return (
             <div>
-                <div className="button-container">
-                    <Link to={"/search"}>
-                        <button>Back to Search</button>
-                    </Link>
-                </div>
+                {Array.isArray(remoteSearchResults) && (
+                    <div className="detailPage-button-container">
+                        <Link to={"/search"}>
+                            <button>Back to Search</button>
+                        </Link>
+                    </div>)}
+                {!Array.isArray(remoteSearchResults) && (
+                    <div className="detailPage-button-container">
+                        <Link to={"/home"}>
+                            <button>Back to Home</button>
+                        </Link>
+                    </div>)}
                 <h1>{`${remotePetData.status} ${remotePetData.species} in ${remotePetData.contact.address.city}, ${remotePetData.contact.address.state} ${remotePetData.contact.address.postcode}`}</h1>
                 <div className="container">
                     <div className="row">
                         <div className="col-4">
-                            <img src={remotePetData.photos[0] ? remotePetData.photos[0].large : ""}
-                                 alt={`${remotePetData.name} - ${remotePetData.breeds.primary}`}
-                                 style={{margin: 20}}
-                                 className="img-fluid rounded mx-auto d-block"/>
-                            <button onClick={handleLike}>{isLiked ? <FaStar/> : <FaRegStar/>}</button>
+                            <div style={{position: "relative", margin: 20}}>
+                                <img src={remotePetData.photos[0] ? remotePetData.photos[0].large : ""}
+                                     alt={`${remotePetData.name} - ${remotePetData.breeds.primary}`}
+                                     style={{margin: 20}}
+                                     className="img-fluid rounded mx-auto d-block"/>
+                                {currentUser && (
+                                    isLiked ? (
+                                        <button style={{
+                                            background: "rgba(255, 255, 255, 0.7)",
+                                            border: "none",
+                                            position: "absolute",
+                                            top: 0,
+                                            right: 0,
+                                            padding: "5px",
+                                            borderRadius: "50%"
+                                        }} onClick={handleUnlike}>
+                                            <FaStar style={{color: "#975A5E", fontSize: '2em'}}/>
+                                        </button>
+                                    ) : (
+                                        <button style={{
+                                            background: "rgba(255, 255, 255, 0.7)",
+                                            border: "none",
+                                            position: "absolute",
+                                            top: 0,
+                                            right: 0,
+                                            padding: "5px",
+                                            borderRadius: "50%"
+                                        }} onClick={handleLike}>
+                                            <FaRegStar style={{color: "#c4c197", fontSize: '2em'}}/>
+                                        </button>
+                                    )
+                                )}
+                            </div>
                         </div>
                         <div className="col-8" style={{padding: 20}}>
                             <div className="row">
@@ -221,7 +273,7 @@ function PetDetails() {
                                 <div className="col-3 text-end pet-info">
                                     <strong>Contact:</strong>
                                 </div>
-                                <div className="col-8 button-container">
+                                <div className="col-8 detailPage-button-container">
                                     <a href={remotePetData.url} target="_blank" rel="noopener noreferrer">
                                         <button className="contact">Contact Owner</button>
                                     </a>

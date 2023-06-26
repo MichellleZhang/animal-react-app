@@ -14,7 +14,7 @@ function PetDetails() {
     pet.uploadedImage=decodeURIComponent(pet.uploadedImage)
     const handleContactClick = () => {
         const {userId}=pet;
-        Navigate("/profile/"+userId);
+        navigate("/profile/"+userId);
     };
 
     const getGoogleMapImageUrl = (address) => {

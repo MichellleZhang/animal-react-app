@@ -1,4 +1,5 @@
 import axios from "axios";
+
 const SERVER_API_URL = "http://localhost:4000/api";
 const USERS_URL = `${SERVER_API_URL}/users`;
 const api = axios.create({ baseURL: USERS_URL, withCredentials: true });

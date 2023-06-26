@@ -21,6 +21,7 @@ function PetDetails() {
 
     const petData = findPet(id, localSearchResults, remoteSearchResults);
 
+    console.log(petData);
 
     const getGoogleMapImageUrl = (address) => {
         const baseUrl = "https://maps.googleapis.com/maps/api/staticmap";
@@ -80,6 +81,11 @@ function PetDetails() {
         //fetchIsliked();
     }, [currentUser, id]);
 
+    const handleImageError = (e) => {
+        e.target.onerror = null; // prevent infinite loop if the second image also fails to load
+        e.target.src = petData.uploadedImage;
+    }
+
 
     if (!location.state) {
         return <div>No data available. Please go back to the search page and click on a pet for details.</div>;
@@ -89,21 +95,30 @@ function PetDetails() {
         console.log("localSearchResults", localSearchResults);
         const localPetData =  findLocalPet(id, localSearchResults);
         console.log("localPetData", localPetData);
+        let address = localPetData.address || localPetData.addressLastSeen;
+        let area = localPetData.area || localPetData.addressLastSeen;
         return (
             <div>
-                <div className="detailPage-button-container">
-                    <Link to={"/search"}>
-                        <button>Back to Search</button>
-                    </Link>
-                </div>
+                {Array.isArray(localSearchResults) && (
+                    <div className="detailPage-button-container">
+                        <Link to={"/search"}>
+                            <button>Back to Search</button>
+                        </Link>
+                    </div>)}
+                {!Array.isArray(localSearchResults) && (
+                    <div className="detailPage-button-container">
+                        <Link to={"/home"}>
+                            <button>Back to Home</button>
+                        </Link>
+                    </div>)}
 
-                <h1>{`${localPetData.status} ${localPetData.type} in ${localPetData.area}`}</h1>
+                <h1>{localPetData.status || "Lost"} {localPetData.type || localPetData.breed} in {localPetData.area || localPetData.zipcode}</h1>
                 <div className="container">
                     <div className="row">
                         <div className="col-4">
                             <div style={{position: "relative", margin: 20}}>
                                 <img src={`/img/${localPetData.image}`} alt={localPetData.name}
-                                     className="img-fluid rounded mx-auto d-block"/>
+                                     className="img-fluid rounded mx-auto d-block" onError={handleImageError}/>
                                 {currentUser && (
                                     isLiked ? (
                                         <button style={{
@@ -141,7 +156,7 @@ function PetDetails() {
                                     <strong>Name:</strong>
                                 </div>
                                 <div className="col-8 pet-info">
-                                    {localPetData.name}
+                                    {localPetData.name || localPetData.petName}
                                 </div>
                             </div>
                             <div className="row">
@@ -149,7 +164,7 @@ function PetDetails() {
                                     <strong>Gender:</strong>
                                 </div>
                                 <div className="col-8 pet-info">
-                                    {localPetData.sex}
+                                    {localPetData.sex || localPetData.gender}
                                 </div>
                             </div>
                             <div className="row">
@@ -173,9 +188,9 @@ function PetDetails() {
                                     <strong>Last seen address:</strong>
                                 </div>
                                 <div className="col-8 pet-info">
-                                    {localPetData.address}
+                                    {localPetData.address || localPetData.addressLastSeen}
                                     <img
-                                        src={getGoogleMapImageUrl(`${localPetData.address}, ${localPetData.area} ${localPetData.zipcode}`)}
+                                        src={getGoogleMapImageUrl(`${address}, ${area} ${localPetData.zipcode}`)}
                                         style={{margin: 5, paddingBottom: 10}} alt="Location on Map"/>
                                 </div>
                             </div>

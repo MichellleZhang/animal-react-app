@@ -76,11 +76,12 @@ const PetListItem = ({ item, localSearchResults, remoteSearchResults }) => {
   const navigate = useNavigate();
   let img = "http://localhost:4000" + item.uploadedImage;
 
+  console.log("itemmmmm", item)
   const handleClickItem = () => {
     item.uploadedImage = img
-    navigate('/localDetail', {
+    navigate(`/details/${item._id}`, {
       state: {
-        item
+        localSearchResults:item
       }
     })
     // window.open(item.url)

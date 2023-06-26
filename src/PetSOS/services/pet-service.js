@@ -31,7 +31,18 @@ export const createMyPets = async ({ name, type, image, sex, description }) => {
 };
 
 export const findIAllMyPets = async () => {
-  // console.log("执行到了这里")
-  const response = await request.get(`${PETS_API}/myallMypets1`);
+  const response = await request.get(`${API_BASE}/petss/myallMypets`);
   return response.data;
 }
+
+export const deleteMypets = async(id) => {
+  const response = await axios.delete(`${API_BASE}/petss/${id}`);
+  return response.data;
+}
+
+export const visitMypets = async(id) => {
+  console.log("id input",id)
+  const response = await axios.get(`${API_BASE}/petss/${id}`);
+  return response.data;
+}
+

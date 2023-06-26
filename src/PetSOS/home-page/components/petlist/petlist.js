@@ -3,11 +3,12 @@ import { getAnimal } from "../../../api/homepage";
 import styles from "./petlist.module.scss";
 import { useEffect } from "react";
 import { useRef } from "react";
+import {useNavigate} from "react-router";
+
 const PetList = () => {
   const [animalsList, setAnimalList] = useState([]);
   const [displayList, setDisplayList] = useState([]);//displayList=animalList[currentNdx+6]
-  const currentNdx = useRef(0); 
-
+  const currentNdx = useRef(0);
 
   const fetchAnimals = async () => {
     const res = await getAnimal("dog", "10001");
@@ -64,13 +65,14 @@ const PetList = () => {
 };
 
 const PetListItem = ({ item }) => {
+    const navigate = useNavigate();
     const photos=item.photos;
     let img='';
     if(photos?.length!==0){
         img=photos[0].full;
     }
     const handleClickItem=()=>{
-        window.open(item.url)
+        navigate(`/details/${item.id}`, { state: {remoteSearchResults: item}})
     }
 
   return (

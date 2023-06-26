@@ -68,7 +68,7 @@ function PetDetails() {
     // useEffect(() => {
     //     fetchIsliked();
     // }, [currentUser, id,fetchIsliked]);
-    
+
     useEffect(() => {
         const fetchIsliked = async () => {
             if (!currentUser) {
@@ -77,17 +77,19 @@ function PetDetails() {
             const data = await likeService.checkIfUserLikedPet(currentUser._id, currentUser.role, id);
             setIsLiked(data);
         }
-    
+
         fetchIsliked();
     }, [currentUser, id]);
-    
+
 
     if (!location.state) {
         return <div>No data available. Please go back to the search page and click on a pet for details.</div>;
     }
 
     if (localSearchResults) {
-        const localPetData = localSearchResults.find(p => p._id === id);
+        console.log("localSearchResults", localSearchResults);
+        const localPetData =  findLocalPet(id, localSearchResults);
+        console.log("localPetData", localPetData);
         return (
             <div>
                 <div className="detailPage-button-container">
@@ -301,7 +303,12 @@ function PetDetails() {
 }
 
 function findLocalPet(id, localResults) {
-    return localResults.find(p => p._id === id);
+    if (Array.isArray(localResults)) {
+        return localResults.find(p => p._id === id);
+    }
+    else if (localResults._id === id) {
+        return localResults;
+    }
 }
 
 function findRemotePet(id, remoteResults) {

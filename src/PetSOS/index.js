@@ -18,7 +18,7 @@ import PublicProfile from "./profile-page/Profile-public"
 import Search from "./search/search";
 import Mypets from "./myPet-page/myPets"
 import PetDetails from "./details-page/petsDetail";
-import Myposts from "./profile-page/my-posts"
+import PostedList from "./home-page/components/lostpet/lostpet"
 import LocalDetail from "./localdetails-page";
 const store = configureStore({
     reducer: { user: authReducer }
@@ -44,7 +44,7 @@ function PetSOS() {
                             <Route path="/search" element={<Search />} />
                             <Route path="/home" element={<HomePage />} />
                             <Route path="/reportLost" element={<LostPet />} />
-                            <Route path="/posts" element={<Myposts/>} />
+                            <Route path="/posts" element={<PostedList/>} />
                             <Route path="/localDetail" element={<LocalDetail/>} />
                         </Routes>
                     </div>

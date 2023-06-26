@@ -65,10 +65,10 @@ function PetDetails() {
                         </div>
                         <div className="row">
                             <div className="col-3 text-end pet-info">
-                                <strong>Breed:</strong>
+                                <strong>Post Type:</strong>
                             </div>
                             <div className="col-8 pet-info">
-                                {pet.breed}
+                                {pet.postType}
                             </div>
                         </div>
                         <div className="row">

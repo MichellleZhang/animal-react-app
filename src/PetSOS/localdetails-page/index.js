@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 import {useLocation} from 'react-router-dom';
 
 function PetDetails() {
-
+    const navigate = useNavigate();
     const location = useLocation();
     const pet=location.state.item;
     pet.uploadedImage=decodeURIComponent(pet.uploadedImage)

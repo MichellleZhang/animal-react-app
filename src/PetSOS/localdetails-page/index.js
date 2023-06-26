@@ -12,6 +12,7 @@ function PetDetails() {
     const location = useLocation();
     const pet=location.state.item;
     pet.uploadedImage=decodeURIComponent(pet.uploadedImage)
+    const navigate=useNavigate();
     const handleContactClick = () => {
         const {userId}=pet;
         navigate("/profile/"+userId);

@@ -19,12 +19,10 @@ import Search from "./search/search";
 import Mypets from "./myPet-page/myPets"
 import PetDetails from "./details-page/petsDetail";
 import Myposts from "./profile-page/my-posts"
-import likePetReducer from './reducers/likePet-reducer';
 
 const store = configureStore({
     reducer: {
         user: authReducer,
-        like: likePetReducer
     }
 });
 

@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import { accessUser } from "../services/auth-service";
 import { visitMypets } from "../services/pet-service";
 import { useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import styles from "../home-page/components/petlist/petlist.module.scss";
 import { useRef } from "react";
 import "./publicProfile.css"
 import * as likeService from "../services/likePet-service";
+import styles from "../home-page/components/petlist/petlist.module.scss";
 
 function PublicProfile() {
     const [myPets, setMypets] = useState([])
@@ -72,6 +73,7 @@ function PublicProfile() {
         setDisplayList(list);
     };
     if (displayList.length === 0) return <></>
+
 
     return (
         <div className="boxPublic">

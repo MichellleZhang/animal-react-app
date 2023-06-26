@@ -57,17 +57,30 @@ function PetDetails() {
         }
     }
 
-    const fetchIsliked = async () => {
-        if (!currentUser) {
-            return;
-        }
-        const data = await likeService.checkIfUserLikedPet(currentUser._id, currentUser.role, id);
-        setIsLiked(data);
-    }
+    // const fetchIsliked = async () => {
+    //     if (!currentUser) {
+    //         return;
+    //     }
+    //     const data = await likeService.checkIfUserLikedPet(currentUser._id, currentUser.role, id);
+    //     setIsLiked(data);
+    // }
 
+    // useEffect(() => {
+    //     fetchIsliked();
+    // }, [currentUser, id,fetchIsliked]);
+    
     useEffect(() => {
+        const fetchIsliked = async () => {
+            if (!currentUser) {
+                return;
+            }
+            const data = await likeService.checkIfUserLikedPet(currentUser._id, currentUser.role, id);
+            setIsLiked(data);
+        }
+    
         fetchIsliked();
     }, [currentUser, id]);
+    
 
     if (!location.state) {
         return <div>No data available. Please go back to the search page and click on a pet for details.</div>;

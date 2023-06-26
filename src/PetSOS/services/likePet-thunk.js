@@ -21,6 +21,7 @@ export const unlikePet = (userId, petId, role) => async (dispatch) => {
 export const getLikedPetsByUser = (userId) => async (dispatch) => {
     try {
         const { data } = await getLikedPets(userId);
+        return data;
     } catch (error) {
         console.log(error);
     }

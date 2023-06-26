@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import styles from "../home-page/components/petlist/petlist.module.scss";
 import { useRef } from "react";
 import "./publicProfile.css"
+import * as likeService from "../services/likePet-service";
 
 function PublicProfile() {
     const [myPets, setMypets] = useState([])
@@ -18,10 +19,6 @@ function PublicProfile() {
     const [displayList, setDisplayList] = useState([]);
     const currentNdx = useRef(0);
 
-    // const handleAccess = async(id) =>{
-    //     const responseData = await accessUser(id);
-    //     setresponseData(responseData);
-    // }
     accessUser(id)
         .then((responseData) => {
             setresponseData(responseData)
@@ -40,7 +37,7 @@ function PublicProfile() {
         }
     };
 
-    const fetchMyLikes = async () => {
+    const fetchMyLikes = async (id) => {
         const pets = await likeService.getLikedPets(id);
         setPetLiked(pets);
     }
@@ -57,6 +54,7 @@ function PublicProfile() {
 
     useEffect(() => {
         fetchVisitedMypets(id);
+        fetchMyLikes(id);
     }, [id]);
 
     const handleRight = () => {
@@ -75,11 +73,8 @@ function PublicProfile() {
     };
     if (displayList.length === 0) return <></>
 
-
-
-
     return (
-        <div className="box-public">
+        <div className="boxPublic">
             <h1>Welcome to {responseData.username}'s profile</h1>
             <h3 className="compBetween">Information</h3>
             <div className="row compBetween">
@@ -149,7 +144,7 @@ const PetListItem1 = ({ item }) => {
     return (
       <div className={styles.petlistItemWrapepr}>
         <div className={styles.petlistItem}>
-          <img src={item.image} alt="Default" />
+          <img src={item.image} alt="No Upload" />
         </div>
         <div className={styles.label}>{item.name}</div>
         <div className={styles.label}>{item.type}</div>

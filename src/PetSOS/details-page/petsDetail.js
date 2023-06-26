@@ -76,9 +76,8 @@ function PetDetails() {
             }
             const data = await likeService.checkIfUserLikedPet(currentUser._id, currentUser.role, id);
             setIsLiked(data);
-        }
-
-        fetchIsliked();
+        };
+        //fetchIsliked();
     }, [currentUser, id]);
 
 

@@ -4,7 +4,6 @@ const USERS_URL = `${SERVER_API_URL}/users`;
 const api = axios.create({ baseURL: USERS_URL, withCredentials: true });
 
 export const login = async ({ account, password }) => {
-    debugger
     const response = await api.post(`${USERS_URL}/login`, { account, password });
     const user = response.data;
     return user;
@@ -55,7 +54,8 @@ export const deleteUser = async (id) => {
 
 export const accessUser = async (id) => {
     const response = await axios.get(`${USERS_URL}/${id}`);
-    console.log(response.data)
+    console.log("resssss",response)
+    console.log("resssssdddddta",response.data)
     return response.data;
 };
 

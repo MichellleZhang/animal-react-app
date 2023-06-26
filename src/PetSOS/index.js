@@ -36,11 +36,11 @@ function PetSOS() {
                             <Route path="/privatePolicy" element={<PrivatePolicy />} />
                             <Route path="/serviceTerm" element={<ServiceTerm />} />
                             <Route path="/contactInfo" element={<ContactInfo />} />
-                            <Route path="/profile" element={<ProtectedRoute> <Profile /></ProtectedRoute>} />
                             <Route path="/profile/:id" element={<PublicProfile />} />
+                            <Route path="/profile" element={<ProtectedRoute> <Profile /></ProtectedRoute>} />
                             <Route path="/management-dashboard" element={<ProtectedRoute><ManagementDashboard /></ProtectedRoute>} />
                             <Route path="/myPets" element={<Mypets />} />
-                            <Route path="/details/:id" element={<PetDetails />} />
+                            <Route exact path="/details/:id" element={<PetDetails />} />
                             <Route path="/search" element={<Search />} />
                             <Route path="/home" element={<HomePage />} />
                             <Route path="/reportLost" element={<LostPet />} />

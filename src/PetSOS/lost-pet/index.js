@@ -45,9 +45,9 @@ const LostPet = () => {
     const file = event.target.files[0];
     const res = await lostPetUploadImage(file);
     if (res.data.success) {
-      console.log("上传成功", res.data.success);
+      console.log("success", res.data.success);
       formik.values.uploadedImage = res.data.url;
-      toast.success("上传成功");
+      toast.success("success");
     } else {
       toast.warning(res.data.success);
     }

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import {useParams} from 'react-router-dom';
+import {Navigate, useParams} from 'react-router-dom';
 import "./petsDetail.css";
 import {useSelector, useDispatch} from "react-redux";
 import {useNavigate} from 'react-router-dom';
@@ -14,6 +14,7 @@ function PetDetails() {
     pet.uploadedImage=decodeURIComponent(pet.uploadedImage)
     const handleContactClick = () => {
         const {userId}=pet;
+        Navigate("/profile/"+userId);
     };
 
     const getGoogleMapImageUrl = (address) => {
@@ -57,15 +58,16 @@ function PetDetails() {
                                 <strong>Gender:</strong>
                             </div>
                             <div className="col-8 pet-info">
-                                {pet.gender}111
+                                {pet.gender}
                             </div>
+                            
                         </div>
                         <div className="row">
                             <div className="col-3 text-end pet-info">
-                                <strong>Description:</strong>
+                                <strong>Breed:</strong>
                             </div>
                             <div className="col-8 pet-info">
-                                {pet.description}111
+                                {pet.breed}
                             </div>
                         </div>
                         <div className="row">

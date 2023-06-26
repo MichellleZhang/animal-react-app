@@ -1,4 +1,4 @@
-import {Routes, Route} from "react-router";
+import { Routes, Route } from "react-router";
 import Login from "../PetSOS/login-page/login";
 import Register from "../PetSOS/register-page/register";
 import PrivatePolicy from "../PetSOS/details-page/PrivatePolicy"
@@ -19,13 +19,10 @@ import Search from "./search/search";
 import Mypets from "./myPet-page/myPets"
 import PetDetails from "./details-page/petsDetail";
 import Myposts from "./profile-page/my-posts"
-
+import LocalDetail from "./localdetails-page";
 const store = configureStore({
-    reducer: {
-        user: authReducer,
-    }
+    reducer: { user: authReducer }
 });
-
 function PetSOS() {
     return (
         <Provider store={store}>
@@ -39,15 +36,16 @@ function PetSOS() {
                             <Route path="/privatePolicy" element={<PrivatePolicy />} />
                             <Route path="/serviceTerm" element={<ServiceTerm />} />
                             <Route path="/contactInfo" element={<ContactInfo />} />
-                            <Route path="/profile/:id" element={<PublicProfile />} />
                             <Route path="/profile" element={<ProtectedRoute> <Profile /></ProtectedRoute>} />
+                            <Route path="/profile/:id" element={<PublicProfile />} />
                             <Route path="/management-dashboard" element={<ProtectedRoute><ManagementDashboard /></ProtectedRoute>} />
                             <Route path="/myPets" element={<Mypets />} />
-                            <Route exact path="/details/:id" element={<PetDetails />} />
+                            <Route path="/details/:id" element={<PetDetails />} />
                             <Route path="/search" element={<Search />} />
                             <Route path="/home" element={<HomePage />} />
                             <Route path="/reportLost" element={<LostPet />} />
-                            <Route path="/myposts" element={<Myposts/>} />
+                            <Route path="/posts" element={<Myposts/>} />
+                            <Route path="/localDetail" element={<LocalDetail/>} />
                         </Routes>
                     </div>
                 </div>
@@ -55,5 +53,4 @@ function PetSOS() {
         </Provider>
     )
 }
-
 export default PetSOS;

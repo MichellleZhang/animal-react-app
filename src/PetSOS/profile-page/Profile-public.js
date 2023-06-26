@@ -4,8 +4,9 @@ import { useParams } from 'react-router-dom';
 import { accessUser } from "../services/auth-service";
 import { visitMypets } from "../services/pet-service";
 import { useSelector } from "react-redux";
-import * as likeService from "../services/likePet-service";
-
+import styles from "../home-page/components/petlist/petlist.module.scss";
+import { useRef } from "react";
+import "./publicProfile.css"
 
 function PublicProfile() {
     const [myPets, setMypets] = useState([])
@@ -14,6 +15,8 @@ function PublicProfile() {
     const [petLiked, setPetLiked] = useState([]);
 
     const { id } = useParams();
+    const [displayList, setDisplayList] = useState([]);
+    const currentNdx = useRef(0);
 
     // const handleAccess = async(id) =>{
     //     const responseData = await accessUser(id);
@@ -43,9 +46,34 @@ function PublicProfile() {
     }
 
     useEffect(() => {
+        const end = currentNdx.current + 6;
+        if (end > myPets.length) {
+            setDisplayList(myPets);
+            return;
+        }
+        const list = myPets.slice(currentNdx.current, end);
+        setDisplayList(list);
+    }, [myPets]);
+
+    useEffect(() => {
         fetchVisitedMypets(id);
-        fetchMyLikes();
-    }, []);
+    }, [id]);
+
+    const handleRight = () => {
+        if (currentNdx.current + 6 >= myPets.length) return;
+        currentNdx.current += 1;
+        const end = currentNdx.current + 6;
+        const list = myPets.slice(currentNdx.current, end);
+        setDisplayList(list);
+    };
+    const handleLeft = async () => {
+        if (currentNdx.current <= 0) return;
+        currentNdx.current -= 1;
+        const end = currentNdx.current + 6;
+        const list = myPets.slice(currentNdx.current, end);
+        setDisplayList(list);
+    };
+    if (displayList.length === 0) return <></>
 
 
 
@@ -91,23 +119,21 @@ function PublicProfile() {
             {responseData.role === "PetOwner" ? (
                 <>
                     <h3 className="compBetween">Owned Pets</h3>
-                    {/* <div className="card-container">
-                        {myPets.map((pet, index) => (
-                            <div key={index} className="row-item" style={{ marginTop: "10px" }}>
-                                <div className="col-4 col-sm-5 col-xs-8">
-                                    <h4 className="card-title">No. {index + 1}: {pet.name}</h4>
-                                    <p className="card-text">Type: {pet.type}</p>
-                                    <p className="card-text">Gender: {pet.sex}</p>
-                                    <p className="card-text">Description: {pet.description}</p>
-                                </div>
-                                <div className="card-img-container col">
-                                    {pet.image && (
-                                        <img className="card-img" style={{ marginBottom: "1px", width: "100%", height: "100%", objectFit: "cover" }} src={pet.image} alt="Pets Headshot" />
-                                    )}
-                                </div>
+                    <div className={styles.container}>
+                        <div className={styles.controllerWrapper}>
+                            <div className={styles.leftButton} onClick={handleLeft}>
+                                《
                             </div>
-                        ))}
-                    </div> */}
+                            <div className={styles.rightButton} onClick={handleRight}>
+                                》
+                            </div>
+                        </div>
+                        <div className={styles.petlistWrapper}>
+                            {displayList.map((item, ndx) => (
+                                <PetListItem1 key={ndx} item={item} />
+                            ))}
+                        </div>
+                    </div>
                 </>
             ) : null}
 
@@ -118,4 +144,18 @@ function PublicProfile() {
         </div>
     )
 }
+
+const PetListItem1 = ({ item }) => {
+    return (
+      <div className={styles.petlistItemWrapepr}>
+        <div className={styles.petlistItem}>
+          <img src={item.image} alt="Default" />
+        </div>
+        <div className={styles.label}>{item.name}</div>
+        <div className={styles.label}>{item.type}</div>
+        <div className={styles.description}>{item.description}</div>
+      </div>
+    );
+  };
+  
 export default PublicProfile;

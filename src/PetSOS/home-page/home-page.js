@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import styles from "./home-page.module.scss";
+import styles from "./home-page.module.css";
 import PetList from "./components/petlist/petlist";
+import LostpetList from "./components/lostpet/lostpet"
 // for testing purpose
 const HomePage=()=>{
 
@@ -16,6 +17,7 @@ const HomePage=()=>{
              </div>
         </div>
         <PetList/>
+        <LostpetList/>
     </div>;
 }
 

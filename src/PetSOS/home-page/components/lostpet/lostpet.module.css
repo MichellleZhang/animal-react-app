@@ -1,0 +1,69 @@
+.container {
+    width: 100%;
+    position: relative;
+    margin: 30px 0px;
+  }
+  .container .controllerWrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+  }
+  .container .controllerWrapper .controllButton, .container .controllerWrapper .leftButton, .container .controllerWrapper .rightButton {
+    user-select: none;
+    pointer-events: auto;
+  }
+  .container .controllerWrapper .leftButton {
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .container .controllerWrapper .rightButton {
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .container .petlistWrapper {
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    height: 100%;
+    padding: 0px 30px;
+    box-sizing: border-box;
+    justify-content: space-between;
+  }
+  .container .petlistWrapper .petlistItemWrapepr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 200px;
+    margin: 10px;
+    cursor: pointer;
+   
+  }
+  .container .petlistWrapper .petlistItemWrapepr .petlistItem {
+    user-select: none;
+    min-width: 200px;
+    min-height: 260px;
+    max-width: 200px;
+    max-height: 260px;
+    background-color: #f1ede7;
+    border-radius: 20px;
+    display: flex;
+    margin: 10px;
+    overflow: hidden;
+  }
+  .container .petlistWrapper .petlistItemWrapepr .petlistItem img {
+    width: 100% !important;
+    padding: 0px !important;
+    margin: 0px !important;
+  }
+  .container .petlistWrapper .petlistItemWrapepr .label {
+    font-size: 18px;
+    color: #a1a091;
+  }
+  .container .petlistWrapper .petlistItemWrapepr .description {
+    font-size: 18px;
+    color: #a1a091;
+  }

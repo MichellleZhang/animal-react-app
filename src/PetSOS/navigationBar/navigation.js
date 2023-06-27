@@ -34,7 +34,7 @@ const NavigationBar = () => {
                 <Link className="nav-link" to="/home">Home</Link>
               </li>
               <li className={`nav-item ${active === "reportLost" ? "active" : ""}`}>
-                <Link className="nav-link" to="/reportLost">I Lost a Pet</Link>
+                <Link className="nav-link" to="/reportLost">Report lost & Found</Link>
               </li>
               <li className={`nav-item ${active === "search" ? "active" : ""}`}>
                 <Link className="nav-link" to="/search">Search</Link>

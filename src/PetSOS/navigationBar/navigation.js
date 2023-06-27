@@ -48,7 +48,7 @@ const NavigationBar = () => {
               )}
               
               {currentUser ? (
-                <li className={`nav-item ${active === "profile" || active === "management-dashboard" ? "active" : ""}`}>
+                <li className={`nav-item ${active === "profile" || active === "management-dashboard" || active === "posts" ? "active" : ""}`}>
                   <div className="nav1">
                     <Link className="nav-link dropdown-toggle" aria-expanded="true" to="/profile">{currentUser.username}</Link>
                     <div className="nav2">

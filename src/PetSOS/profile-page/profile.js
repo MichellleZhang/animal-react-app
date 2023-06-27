@@ -30,7 +30,7 @@ function Profile() {
     }, [currentUser]);
 
     return (
-        <div className="boxbox">
+        <div className="boxbox" style={{ margin: "30px" }}>
             <div>
                 <h1>My Profile</h1>
                 <div class="nav nav-tabs">

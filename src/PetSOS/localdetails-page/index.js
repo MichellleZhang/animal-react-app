@@ -10,9 +10,10 @@ import {useLocation} from 'react-router-dom';
 function PetDetails() {
     const navigate = useNavigate();
     const location = useLocation();
+    console.log("locccccc",location)
     const pet=location.state.item;
+    console.log("petttt",pet)
     pet.uploadedImage=decodeURIComponent(pet.uploadedImage)
-    const navigate=useNavigate();
     const handleContactClick = () => {
         const {userId}=pet;
         navigate("/profile/"+userId);

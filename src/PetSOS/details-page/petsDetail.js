@@ -58,18 +58,6 @@ function PetDetails() {
         }
     }
 
-    // const fetchIsliked = async () => {
-    //     if (!currentUser) {
-    //         return;
-    //     }
-    //     const data = await likeService.checkIfUserLikedPet(currentUser._id, currentUser.role, id);
-    //     setIsLiked(data);
-    // }
-
-    // useEffect(() => {
-    //     fetchIsliked();
-    // }, [currentUser, id,fetchIsliked]);
-
     useEffect(() => {
         const fetchIsliked = async () => {
             if (!currentUser) {
@@ -78,7 +66,7 @@ function PetDetails() {
             const data = await likeService.checkIfUserLikedPet(currentUser._id, currentUser.role, id);
             setIsLiked(data);
         };
-        //fetchIsliked();
+        fetchIsliked();
     }, [currentUser, id]);
 
     const handleImageError = (e) => {
@@ -98,7 +86,7 @@ function PetDetails() {
         let address = localPetData.address || localPetData.addressLastSeen;
         let area = localPetData.area || localPetData.addressLastSeen;
         return (
-            <div>
+            <div style={{ margin: "30px" }}>
                 {Array.isArray(localSearchResults) && (
                     <div className="detailPage-button-container">
                         <Link to={"/search"}>
@@ -149,45 +137,44 @@ function PetDetails() {
                             </div>
                         </div>
 
-
                         <div className="col-8" style={{padding: 20}}>
                             <div className="row">
-                                <div className="col-3 text-end pet-info">
+                                <div className="col-3 text-end detailPage-pet-info">
                                     <strong>Name:</strong>
                                 </div>
-                                <div className="col-8 pet-info">
+                                <div className="col-8 detailPage-pet-info">
                                     {localPetData.name || localPetData.petName}
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-3 text-end pet-info">
+                                <div className="col-3 text-end detailPage-pet-info">
                                     <strong>Gender:</strong>
                                 </div>
-                                <div className="col-8 pet-info">
+                                <div className="col-8 detailPage-pet-info">
                                     {localPetData.sex || localPetData.gender}
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-3 text-end pet-info">
+                                <div className="col-3 text-end detailPage-pet-info">
                                     <strong>Description:</strong>
                                 </div>
-                                <div className="col-8 pet-info">
+                                <div className="col-8 detailPage-pet-info">
                                     {localPetData.description}
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-3 text-end pet-info">
+                                <div className="col-3 text-end detailPage-pet-info">
                                     <strong>Last seen date:</strong>
                                 </div>
-                                <div className="col-8 pet-info">
+                                <div className="col-8 detailPage-pet-info">
                                     {localPetData.date}
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-3 text-end pet-info">
+                                <div className="col-3 text-end detailPage-pet-info">
                                     <strong>Last seen address:</strong>
                                 </div>
-                                <div className="col-8 pet-info">
+                                <div className="col-8 detailPage-pet-info">
                                     {localPetData.address || localPetData.addressLastSeen}
                                     <img
                                         src={getGoogleMapImageUrl(`${address}, ${area} ${localPetData.zipcode}`)}
@@ -195,7 +182,7 @@ function PetDetails() {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-3 text-end pet-info">
+                                <div className="col-3 text-end detailPage-pet-info">
                                     <strong>Contact:</strong>
                                 </div>
                                 <div className="col-8 detailPage-button-container">
@@ -211,7 +198,7 @@ function PetDetails() {
         const remotePetData = findRemotePet(id, remoteSearchResults);
 
         return (
-            <div>
+            <div style={{ margin: "30px" }}>
                 {Array.isArray(remoteSearchResults) && (
                     <div className="detailPage-button-container">
                         <Link to={"/search"}>
@@ -264,34 +251,34 @@ function PetDetails() {
                         </div>
                         <div className="col-8" style={{padding: 20}}>
                             <div className="row">
-                                <div className="col-3 text-end pet-info">
+                                <div className="col-3 text-end detailPage-pet-info">
                                     <strong>Name:</strong>
                                 </div>
-                                <div className="col-8 pet-info">
+                                <div className="col-8 detailPage-pet-info">
                                     {remotePetData.name}
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-3 text-end pet-info">
+                                <div className="col-3 text-end detailPage-pet-info">
                                     <strong>Gender:</strong>
                                 </div>
-                                <div className="col-8 pet-info">
+                                <div className="col-8 detailPage-pet-info">
                                     {remotePetData.gender}
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-3 text-end pet-info">
+                                <div className="col-3 text-end detailPage-pet-info">
                                     <strong>Description:</strong>
                                 </div>
-                                <div className="col-8 pet-info">
+                                <div className="col-8 detailPage-pet-info">
                                     {remotePetData.description}
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-3 text-end pet-info">
+                                <div className="col-3 text-end detailPage-pet-info">
                                     <strong>Address:</strong>
                                 </div>
-                                <div className="col-8 pet-info">
+                                <div className="col-8 detailPage-pet-info">
                                     {remotePetData.contact.address.address1}, {remotePetData.contact.address.city}, {remotePetData.contact.address.state} {remotePetData.contact.address.postcode}
                                     <img
                                         src={getGoogleMapImageUrl(`${remotePetData.contact.address.address1}, ${remotePetData.contact.address.city}, ${remotePetData.contact.address.state} ${remotePetData.contact.address.postcode}`)}
@@ -299,7 +286,7 @@ function PetDetails() {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-3 text-end pet-info">
+                                <div className="col-3 text-end detailPage-pet-info">
                                     <strong>Contact:</strong>
                                 </div>
                                 <div className="col-8 detailPage-button-container">

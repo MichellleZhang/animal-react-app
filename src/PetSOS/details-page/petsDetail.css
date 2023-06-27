@@ -1,11 +1,10 @@
-.pet-info {
+.detailPage-pet-info {
     line-height: 3;
     font-size: 16px;
 }
 
 .detailPage-button-container {
     display: flex;
-    margin-left: 50px;
 }
 
 .detailPage-button-container button {

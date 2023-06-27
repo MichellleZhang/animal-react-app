@@ -5,11 +5,11 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router";
 import { getLostPetList } from "../../../api/lostpet";
+
 const LostpetList = ({ data = null }) => {
   const [animalsList, setAnimalList] = useState([]);
   const [displayList, setDisplayList] = useState([]);//displayList=animalList[currentNdx+6]
   const currentNdx = useRef(0);
-
 
   const fetchAnimals = async () => {
     const res = await getLostPetList();

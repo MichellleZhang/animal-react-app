@@ -14,6 +14,7 @@ function Profile() {
 
     const save = () => {
         dispatch(updateUserThunk(profile));
+        alert("Save successful !")
     };
 
     useEffect(() => {

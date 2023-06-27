@@ -20,12 +20,11 @@ function PublicProfile() {
 
     const currentNdx = useRef(0);
 
-    console.log("iddddddddd", id);
-
     accessUser(id)
         .then((responseData) => {
             setresponseData(responseData)
             console.log("responseData", responseData);
+            console.log("testField", responseData.username);
         })
         .catch((error) => {
             console.error('Error accessing user:', error);
@@ -68,8 +67,7 @@ function PublicProfile() {
         const list = myPets.slice(currentNdx.current, end);
         setDisplayList(list);
     };
-    if (displayList.length === 0) return <></>
-
+    
     return (
         <div className="boxPublic">
             <h1>Welcome to {responseData.username}'s profile</h1>

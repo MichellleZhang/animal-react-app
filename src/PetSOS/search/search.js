@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import "./search.css";
 
 function Search() {
   const [localPets, setLocalPets] = useState([]);
@@ -94,7 +95,8 @@ function Search() {
 
   return (
     <div className="container">
-      <form id="pet-form" onSubmit={handleFormSubmit}>
+      <div className="search-container">
+         <form id="pet-form" onSubmit={handleFormSubmit}>
         <div className="form-group">
           <label htmlFor="animal">Pet Type</label>
           <select
@@ -121,7 +123,9 @@ function Search() {
           />
         </div>
       </form>
-
+      </div>
+     
+      <div className="results-container">
       <div id="results">
         {/* Render local database results */}
         {!noLocalPetsFound && localPets.length > 0 && (
@@ -133,6 +137,7 @@ function Search() {
                 <div
                   key={pet.id}
                   className="card card-body mb-3"
+                  style={{ width: "36rem" }}
                 >
                   {/* Render the details of the local pet */}
                   <div className="row">
@@ -182,13 +187,14 @@ function Search() {
         {/* Render Petfinder API results */}
         {!noApiPetsFound && apiPets.length > 0 && (
           <div>
-            <h2>Petfinder API Results:</h2>
+            <h2>Petfinder API Results: </h2>
             {apiPets.map((pet) => {
               console.log(pet.id, apiPets);
               return (
                 <div
                   key={pet.id}
                   className="card card-body mb-3"
+                  style={{ width: "36rem" }}
                 >
                   {/* Render the details of the Petfinder API pet */}
                   <div className="row">
@@ -243,6 +249,7 @@ function Search() {
         {noLocalPetsFound && noApiPetsFound && localPets.length === 0 && apiPets.length === 0 && (
           <h3>No pets found</h3>
         )}
+      </div>
       </div>
     </div>
   );

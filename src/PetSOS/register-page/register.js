@@ -20,6 +20,10 @@ function Register() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleregister = async () => {
+        if (username === "" || email === "" || password === "" || role === ""){
+            alert("username, email, password,role are required !")
+            return;
+        }
         try {
             await dispatch(registerThunk({ username, lastName, firstName, state, zipCode, phoneNumber, email, password, role }));
             setTimeout(() => {
@@ -39,7 +43,7 @@ function Register() {
                     <div className="inputbox">
                         <div className="row">
                             <div>
-                                <label className="label" htmlFor="username">Username</label>
+                                <label className="label" htmlFor="username">Username<span style={{"color":"red"}}>*</span></label>
                                 <input className="custom-input" type="text" placeholder="Username" id="username" value={username}
                                        onChange={(event) => setUsername(event.target.value)} />
                             </div>
@@ -84,7 +88,7 @@ function Register() {
                         </div>
                         <div className="row">
                             <div>
-                                <label className="label" htmlFor="email" value={email}>Email</label>
+                                <label className="label" htmlFor="email" value={email}>Email<span style={{"color":"red"}}>*</span></label>
                                 <input className="custom-input" type="email" placeholder="Email" id="email"
                                        onChange={(event) => setEmail(event.target.value)}
                                 />
@@ -92,14 +96,14 @@ function Register() {
                         </div>
                         <div className="row">
                             <div>
-                                <label className="label" htmlFor="password" value={email}>Password</label>
+                                <label className="label" htmlFor="password" value={email}>Password<span style={{"color":"red"}}>*</span></label>
                                 <input className="custom-input" type="Password" placeholder="Password" id="password"
                                        onChange={(event) => setPassword(event.target.value)}
                                 />
                             </div>
                         </div>
                         <div className="form-check-inline role row">
-                            <label>Role: </label>
+                            <label>Role<span style={{"color":"red"}}>*</span></label>
                         </div>
                         <div className="form-check form-check-inline">
                             <input className="form-check-input" type="radio" value="Volunteer" name="radio-role" id="role-volunteer"

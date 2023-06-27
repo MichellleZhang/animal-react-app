@@ -29,7 +29,7 @@ const LostPet = () => {
     },
     onSubmit: (values) => {
       if (!values.addressLastSeen) {
-        alert(" Nearest Address Last Seen，Zipcode，Breed is required");
+        alert(" Nearest Address Last Seen,Zipcode,Breed is required");
       }
       console.log("aa", values);
     },

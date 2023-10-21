@@ -21,6 +21,7 @@ function MyPostsPage() {
                 <h3 className="compBetween">Posts</h3>
                 <div><PostedList /></div>
                 <h3 className="compBetween">Watchlisted Pets</h3>
+                
                 <div><WatchedListComponent userId={currentUser._id} /></div>
             </div>
         </div>

@@ -20,6 +20,7 @@ import Mypets from "./myPet-page/myPets"
 import PetDetails from "./details-page/petsDetail";
 import LocalDetail from "./localdetails-page";
 import MyPostsPage from "./myposts-page/myposts-page";
+
 const store = configureStore({
     reducer: { user: authReducer }
 });

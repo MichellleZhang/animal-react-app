@@ -27,10 +27,7 @@ const PetListItem2 = ({item}) => {
 };
 
 
-function WatchedListComponent(userId) {
-
-    const id = userId.userId;
-    console.log("iddddd",id);
+function WatchedListComponent({userId}) {
     console.log("userId", userId);
     const [petLiked, setPetLiked] = useState([]);
     const [displayLikeList, setDisplayLikeList] = useState([]);
@@ -52,8 +49,8 @@ function WatchedListComponent(userId) {
     }, [petLiked]);
 
     useEffect(() => {
-        fetchMyLikes(id);
-    }, [id]);
+        fetchMyLikes(userId);
+    }, [userId]);
 
     const handleRightLiked = () => {
         if (currentLikedNdx.current + 6 >= petLiked.length) return;

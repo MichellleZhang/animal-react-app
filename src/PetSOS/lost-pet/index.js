@@ -2,10 +2,11 @@ import { useState } from "react";
 import styles from "./index.module.css";
 import { useFormik } from "formik";
 import { addLostpet, lostPetUploadImage } from "../api/lostpet";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import Swal from 'sweetalert2'
 
 const LostPet = () => {
   const [status, setStatus] = useState("lost");
@@ -29,7 +30,7 @@ const LostPet = () => {
     },
     onSubmit: (values) => {
       if (!values.addressLastSeen) {
-        alert(" Nearest Address Last Seen,Zipcode,Breed is required");
+        Swal.fire(" Nearest Address Last Seen,Zipcode,Breed is required");
       }
       console.log("aa", values);
     },
@@ -47,34 +48,49 @@ const LostPet = () => {
     if (res.data.success) {
       console.log("success", res.data.success);
       formik.values.uploadedImage = res.data.url;
-      toast.success("success");
+      Swal.fire("success");
     } else {
-      toast.warning(res.data.success);
+      Swal.fire(res.data.success);
     }
   };
   const handleSubmit = async () => {
     formik.values.userId = currentUser._id;
     const values = formik.values;
-    if (currentUser == null) return toast.warning("Please Login");
+    if (currentUser == null) return Swal.fire("Please Login");
     if (!values.addressLastSeen) {
-      return toast.warning(" Nearest Address Last Seen is required");
+      return Swal.fire(" Nearest Address Last Seen is required");
     }
     // if (!values.uploadedImage) {
     //     return toast.warning("image is required")
     // }
     if (!values.breed) {
-      return toast.warning("Breed is required");
+      return Swal.fire("Breed is required");
     }
     if (!values.zipcode) {
-      return toast.warning("Zipcode， is required ");
+      return Swal.fire("Zipcode， is required ");
     }
     const res = await addLostpet(values);
 
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
     if (res.data.success) {
-      toast.success("上传成功");
+      Toast.fire({
+        icon: 'success',
+        title: 'Submit successfully'
+      })
       console.log("上传成功", res.data);
     } else {
-      toast.warning(res.data.success);
+      Swal.fire(res.data.success);
     }
   };
 

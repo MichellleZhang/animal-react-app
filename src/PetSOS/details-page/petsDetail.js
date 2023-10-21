@@ -107,6 +107,7 @@ function PetDetails() {
                             <div style={{position: "relative", margin: 20}}>
                                 <img src={`/img/${localPetData.image}`} alt={localPetData.name}
                                      className="img-fluid rounded mx-auto d-block" onError={handleImageError}/>
+                                <span>ababbab</span>
                                 {currentUser && (
                                     isLiked ? (
                                         <button style={{

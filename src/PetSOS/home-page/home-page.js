@@ -16,7 +16,7 @@ const HomePage = () => {
         const response = await axios.all([getAnimal("dog", "10001"), getLostPetList()]);
         setReponses(response);
     }
-
+      
     useEffect(() => {
         fetchAllData();
     }, [])
@@ -30,9 +30,7 @@ const HomePage = () => {
                 {
                     currentUser ? <div className={styles.subTitle}> Welcome</div>
                         :
-                        <Link to="/register">
-                            <div className={styles.signupButton}>Sign Up</div>
-                        </Link>
+                        <Link to="/register"><div className={styles.signupButton}>Sign Up</div></Link>
                 }
             </div>
         </div>

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { getAnimal } from "../../../api/homepage";
 import styles from "./lostpet.module.css";
 import { useEffect } from "react";
 import { useRef } from "react";
@@ -25,7 +24,7 @@ const LostpetList = ({ data = null }) => {
     }
     const list = animalsList.slice(currentNdx.current, end);
     setDisplayList(list);
-  }, [animalsList]);
+  }, [currentNdx, animalsList]);
 
   useEffect(() => {
     if (data == null) {
@@ -35,7 +34,7 @@ const LostpetList = ({ data = null }) => {
       setAnimalList(animals);
     }
 
-  }, []);
+  }, [data]);
 
   const handleRight = () => {
     if (currentNdx.current + 6 >= animalsList.length) return;

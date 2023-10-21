@@ -1,8 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
-import {Navigate, useParams} from 'react-router-dom';
+import React from 'react';
 import "./petsDetail.css";
-import {useSelector, useDispatch} from "react-redux";
 import {useNavigate} from 'react-router-dom';
 import {Link} from "react-router-dom";
 import {useLocation} from 'react-router-dom';

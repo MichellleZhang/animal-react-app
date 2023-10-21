@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 import Swal from 'sweetalert2'
 
 const LostPet = () => {
-  const [status, setStatus] = useState("lost");
+  const [setStatus] = useState("lost");
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
   useEffect(() => {

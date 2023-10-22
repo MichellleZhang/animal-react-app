@@ -1,4 +1,16 @@
+# Web Application Introduction 
+This is the front-end part for the web applicaion called PetSOS, which aims to help animals find the way home 
+Here is the [back-end](https://github.com/MichellleZhang/animal-node-app.git) of the web application, which applies node.js
+
+# User roles
+There are three roles for users：
+ 1. Administration：managing the users information
+ 2. Pet Owner: Enabling to report lost and found of animals
+ 3. Volunteers: Enabling to report found of animals
+
 # Getting Started with Create React App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).# Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
